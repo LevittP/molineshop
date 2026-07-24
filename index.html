@@ -1,0 +1,1239 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Moline Community Schools Official Store</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f6f6;
+      color: #222;
+    }
+
+    /* TOP BAR */
+
+    .top-bar {
+      background: #262626;
+      color: white;
+      padding: 9px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .top-bar a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    /* HEADER */
+
+    header {
+      background: #7a0019;
+      color: white;
+      padding: 20px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      background: white;
+      color: #7a0019;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .brand h1 {
+      font-size: 23px;
+    }
+
+    .brand p {
+      font-size: 13px;
+      opacity: .85;
+      margin-top: 4px;
+    }
+
+    .cart {
+      background: white;
+      color: #7a0019;
+      padding: 12px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .cart:hover {
+      background: #eee;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      background: white;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      display: block;
+      padding: 17px 25px;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #7a0019;
+      background: #f5f5f5;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 430px;
+      background:
+        linear-gradient(
+          rgba(0,0,0,.55),
+          rgba(0,0,0,.55)
+        ),
+        url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=80")
+        center / cover;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 50px 20px;
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .hero h2 {
+      font-size: 52px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .hero-button {
+      display: inline-block;
+      background: #7a0019;
+      color: white;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .hero-button:hover {
+      background: #a00022;
+    }
+
+    /* SHOP */
+
+    .shop {
+      max-width: 1250px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .shop-header {
+      margin-bottom: 30px;
+      border-bottom: 3px solid #7a0019;
+      padding-bottom: 15px;
+    }
+
+    .shop-header h2 {
+      color: #7a0019;
+      font-size: 30px;
+    }
+
+    .shop-header p {
+      color: #666;
+      margin-top: 5px;
+    }
+
+    /* CATEGORIES */
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+
+    .category {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .category:hover,
+    .category.active {
+      background: #7a0019;
+      color: white;
+      border-color: #7a0019;
+    }
+
+    /* PRODUCTS */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+    }
+
+    .product {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      transition: .2s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,.12);
+    }
+
+    .product-image {
+      height: 250px;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 70px;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .product-info p {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      color: #7a0019;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .add-button {
+      width: 100%;
+      background: #7a0019;
+      color: white;
+      border: none;
+      padding: 13px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .add-button:hover {
+      background: #a00022;
+    }
+
+    /* INFO */
+
+    .info-banner {
+      background: white;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 35px 7%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+      gap: 30px;
+    }
+
+    .info-box {
+      padding: 10px;
+    }
+
+    .info-box span {
+      display: block;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .info-box h3 {
+      margin-bottom: 7px;
+    }
+
+    .info-box p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #252525;
+      color: white;
+      padding: 45px 7%;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+    }
+
+    footer h3 {
+      margin-bottom: 15px;
+    }
+
+    footer p,
+    footer a {
+      color: #ccc;
+      line-height: 1.8;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 30px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #555;
+      text-align: center;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    /* CHECKOUT POPUP */
+
+    #checkout {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .checkout-box {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.3);
+    }
+
+    .checkout-box h2 {
+      color: #7a0019;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .discount-area {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .discount-area input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .discount-area button {
+      padding: 12px 16px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #discountMessage {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .checkout-button {
+      width: 100%;
+      padding: 15px;
+      background: #7a0019;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .close-button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #eee;
+      color: #333;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1000px) {
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      header {
+        gap: 20px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .brand {
+        justify-content: center;
+      }
+
+      .hero h2 {
+        font-size: 38px;
+      }
+
+      .info-banner {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .top-bar {
+        display: none;
+      }
+
+      nav a {
+        padding: 12px;
+        font-size: 13px;
+      }
+
+      .hero h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+
+  <div class="top-bar">
+
+    <div>
+      Official School Merchandise Store
+    </div>
+
+    <div>
+      <a href="#">Help</a>
+      <a href="#">Contact</a>
+      <a href="#">Track Order</a>
+    </div>
+
+  </div>
+
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="brand">
+
+      <div class="logo">
+        MCS
+      </div>
+
+      <div>
+        <h1>Moline Community Schools</h1>
+        <p>Official School Store</p>
+      </div>
+
+    </div>
+
+    <a class="cart" id="cartButton">
+      🛒 Cart (0)
+    </a>
+
+  </header>
+
+
+  <!-- NAVIGATION -->
+
+  <nav>
+
+    <ul>
+      <li><a href="#shop">Shop All</a></li>
+      <li><a href="#shop">Apparel</a></li>
+      <li><a href="#shop">Hats</a></li>
+      <li><a href="#shop">Accessories</a></li>
+      <li><a href="#shop">Spirit Wear</a></li>
+      <li><a href="#shop">Schools</a></li>
+    </ul>
+
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h2>Show Your School Spirit</h2>
+
+      <p>
+        Shop official Moline Community Schools apparel,
+        accessories, and spirit wear.
+      </p>
+
+      <a href="#shop" class="hero-button">
+        Shop Now
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- SHOP -->
+
+  <main class="shop" id="shop">
+
+    <div class="shop-header">
+
+      <h2>Featured Products</h2>
+
+      <p>
+        Official merchandise for students, families, and fans.
+      </p>
+
+    </div>
+
+
+    <!-- CATEGORIES -->
+
+    <div class="categories">
+
+      <div class="category active">
+        All Products
+      </div>
+
+      <div class="category">
+        Apparel
+      </div>
+
+      <div class="category">
+        Spirit Wear
+      </div>
+
+      <div class="category">
+        Accessories
+      </div>
+
+      <div class="category">
+        Hats
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div class="products">
+
+      <div class="product">
+
+        <div class="product-image">
+          👕
+        </div>
+
+        <div class="product-info">
+
+          <h3>Moline Schools T-Shirt</h3>
+
+          <p>
+            Classic school logo tee.
+          </p>
+
+          <div class="price">
+            $20.00
+          </div>
+
+          <button class="add-button">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          🧥
+        </div>
+
+        <div class="product-info">
+
+          <h3>School Spirit Hoodie</h3>
+
+          <p>
+            Comfortable heavyweight hoodie.
+          </p>
+
+          <div class="price">
+            $45.00
+          </div>
+
+          <button class="add-button">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          🧢
+        </div>
+
+        <div class="product-info">
+
+          <h3>Classic Moline Cap</h3>
+
+          <p>
+            Adjustable embroidered school cap.
+          </p>
+
+          <div class="price">
+            $22.00
+          </div>
+
+          <button class="add-button">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          🎒
+        </div>
+
+        <div class="product-info">
+
+          <h3>School Backpack</h3>
+
+          <p>
+            Durable everyday backpack.
+          </p>
+
+          <div class="price">
+            $35.00
+          </div>
+
+          <button class="add-button">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          👚
+        </div>
+
+        <div class="product-info">
+
+          <h3>Classic School Crewneck</h3>
+
+          <p>
+            Soft cotton school sweatshirt.
+          </p>
+
+          <div class="price">
+            $38.00
+          </div>
+
+          <button class="add-button">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          🥤
+        </div>
+
+        <div class="product-info">
+
+          <h3>School Logo Tumbler</h3>
+
+          <p>
+            Reusable insulated drink tumbler.
+          </p>
+
+          <div class="price">
+            $18.00
+          </div>
+
+          <button class="add-button">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          🧦
+        </div>
+
+        <div class="product-info">
+
+          <h3>Spirit Socks</h3>
+
+          <p>
+            Comfortable school spirit socks.
+          </p>
+
+          <div class="price">
+            $12.00
+          </div>
+
+          <button class="add-button">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          📓
+        </div>
+
+        <div class="product-info">
+
+          <h3>School Notebook</h3>
+
+          <p>
+            Official school notebook.
+          </p>
+
+          <div class="price">
+            $8.00
+          </div>
+
+          <button class="add-button">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- INFO -->
+
+  <section class="info-banner">
+
+    <div class="info-box">
+
+      <span>🚚</span>
+
+      <h3>Fast Shipping</h3>
+
+      <p>
+        Orders are shipped directly to your home.
+      </p>
+
+    </div>
+
+
+    <div class="info-box">
+
+      <span>🔒</span>
+
+      <h3>Secure Checkout</h3>
+
+      <p>
+        Your payment information is protected.
+      </p>
+
+    </div>
+
+
+    <div class="info-box">
+
+      <span>🏫</span>
+
+      <h3>Official Merchandise</h3>
+
+      <p>
+        Shop officially licensed school products.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="footer-grid">
+
+      <div>
+
+        <h3>Moline Community Schools</h3>
+
+        <p>
+          Official School Store
+        </p>
+
+        <p>
+          1900 52nd Avenue<br>
+          Moline, IL 61265
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>Customer Service</h3>
+
+        <p><a href="#">Contact Us</a></p>
+        <p><a href="#">Shipping Information</a></p>
+        <p><a href="#">Returns</a></p>
+        <p><a href="#">FAQs</a></p>
+
+      </div>
+
+
+      <div>
+
+        <h3>Store</h3>
+
+        <p><a href="#shop">Shop All</a></p>
+        <p><a href="#shop">Apparel</a></p>
+        <p><a href="#shop">Spirit Wear</a></p>
+        <p><a href="#shop">Accessories</a></p>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 Moline Community Schools. All rights reserved.
+
+    </div>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    let cart = [];
+
+
+    // ADD PRODUCTS TO CART
+
+    document.querySelectorAll(".add-button").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        const product =
+          button.closest(".product");
+
+        const name =
+          product.querySelector("h3").textContent;
+
+        const priceText =
+          product.querySelector(".price").textContent;
+
+        const price =
+          parseFloat(
+            priceText.replace("$", "")
+          );
+
+        cart.push({
+          name: name,
+          price: price
+        });
+
+        updateCart();
+
+        alert(
+          name +
+          " was added to your cart!"
+        );
+
+      });
+
+    });
+
+
+    // UPDATE CART COUNT
+
+    function updateCart() {
+
+      document.getElementById(
+        "cartButton"
+      ).textContent =
+        "🛒 Cart (" +
+        cart.length +
+        ")";
+
+    }
+
+
+    // OPEN CART
+
+    document.getElementById(
+      "cartButton"
+    ).addEventListener(
+      "click",
+      openCart
+    );
+
+
+    function openCart() {
+
+      if (cart.length === 0) {
+
+        alert(
+          "Your cart is empty!"
+        );
+
+        return;
+
+      }
+
+      let itemsHTML = "";
+
+      let total = 0;
+
+
+      cart.forEach((item, index) => {
+
+        total += item.price;
+
+        itemsHTML += `
+
+          <div class="cart-item">
+
+            <span>
+              ${item.name}
+            </span>
+
+            <strong>
+              $${item.price.toFixed(2)}
+            </strong>
+
+          </div>
+
+        `;
+
+      });
+
+
+      const checkout =
+        document.createElement("div");
+
+      checkout.id = "checkout";
+
+
+      checkout.innerHTML = `
+
+        <div class="checkout-box">
+
+          <h2>
+            Your Cart
+          </h2>
+
+          <div>
+            ${itemsHTML}
+          </div>
+
+          <br>
+
+          <label>
+            Discount Code
+          </label>
+
+          <div class="discount-area">
+
+            <input
+              id="discountCode"
+              type="text"
+              placeholder="Enter discount code"
+            >
+
+            <button
+              onclick="applyDiscount()"
+            >
+              Apply
+            </button>
+
+          </div>
+
+          <p id="discountMessage"></p>
+
+          <h3 id="checkoutTotal">
+
+            Total:
+            $${total.toFixed(2)}
+
+          </h3>
+
+
+          <button
+            class="checkout-button"
+            onclick="fakePurchase()"
+          >
+            Complete Demo Purchase
+          </button>
+
+
+          <button
+            class="close-button"
+            onclick="closeCheckout()"
+          >
+            Close
+          </button>
+
+        </div>
+
+      `;
+
+
+      document.body.appendChild(
+        checkout
+      );
+
+    }
+
+
+    // DISCOUNT CODE
+
+    function applyDiscount() {
+
+      const code =
+        document
+          .getElementById(
+            "discountCode"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      // SECRET CODE
+
+      if (code === "t3") {
+
+        window.location.href =
+          "secret.html";
+
+        return;
+
+      }
+
+
+      // INVALID CODE
+
+      const message =
+        document.getElementById(
+          "discountMessage"
+        );
+
+      message.textContent =
+        "Invalid discount code.";
+
+      message.style.color =
+        "red";
+
+    }
+
+
+    // FAKE PURCHASE
+
+    function fakePurchase() {
+
+      const orderNumber =
+        Math.floor(
+          Math.random() *
+          900000
+        ) + 100000;
+
+
+      closeCheckout();
+
+
+      cart = [];
+
+
+      updateCart();
+
+
+      alert(
+
+        "Purchase successful!\n\n" +
+
+        "Order #" +
+        orderNumber +
+
+        "\n\n" +
+
+        "This is a demo store. " +
+
+        "No payment was processed."
+
+      );
+
+    }
+
+
+    // CLOSE CART
+
+    function closeCheckout() {
+
+      const checkout =
+        document.getElementById(
+          "checkout"
+        );
+
+      if (checkout) {
+
+        checkout.remove();
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
+```
