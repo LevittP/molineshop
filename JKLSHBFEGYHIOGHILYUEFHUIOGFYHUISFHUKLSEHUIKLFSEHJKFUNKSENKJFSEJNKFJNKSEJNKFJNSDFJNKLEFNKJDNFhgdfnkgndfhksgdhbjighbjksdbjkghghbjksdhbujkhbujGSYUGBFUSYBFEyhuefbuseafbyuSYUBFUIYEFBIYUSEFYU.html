@@ -1,16 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
 
-  <title>Work in Progress</title>
+>
+
+  <title>Games</title>
 
   <style>
 
@@ -54,9 +56,22 @@
         0 10px 30px
         rgba(0,0,0,.12);
 
-      max-width: 600px;
+      max-width: 900px;
 
       width: 90%;
+
+    }
+
+
+    .logo {
+
+      width: 100px;
+
+      height: 100px;
+
+      object-fit: contain;
+
+      margin-bottom: 20px;
 
     }
 
@@ -83,7 +98,65 @@
     }
 
 
-    a {
+    #file-list {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
+      gap: 12px;
+
+      margin-top: 30px;
+
+      max-height: 500px;
+
+      overflow-y: auto;
+
+      padding: 10px;
+
+    }
+
+
+    #file-list a {
+
+      display: block;
+
+      background: #7a0019;
+
+      color: white;
+
+      text-decoration: none;
+
+      padding: 13px 15px;
+
+      border-radius: 5px;
+
+      font-weight: bold;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+
+      transition:
+        background 0.2s,
+        transform 0.2s;
+
+    }
+
+
+    #file-list a:hover {
+
+      background: #a00022;
+
+      transform: translateY(-2px);
+
+    }
+
+
+    .back-button {
 
       display: inline-block;
 
@@ -99,12 +172,36 @@
 
       font-weight: bold;
 
+      margin-top: 25px;
+
     }
 
 
-    a:hover {
+    .back-button:hover {
 
       background: #a00022;
+
+    }
+
+
+    #loading {
+
+      color: #666;
+
+      font-size: 18px;
+
+      margin: 30px;
+
+    }
+
+
+    #error {
+
+      color: #a00022;
+
+      font-weight: bold;
+
+      margin: 30px;
 
     }
 
@@ -112,29 +209,159 @@
 
 </head>
 
-
 <body>
-
 
   <div class="box">
 
-    <h1>
-      Work in Progress
-    </h1>
+```
+<img
+  class="logo"
+  src="assets/logo.jpg"
+  alt="Moline Community Schools Logo"
+>
 
-    <p>
-      This page is currently
-      under construction.
-    </p>
 
-    <a href="index.html">
-      Return to Store
-    </a>
+<h1>
+  Games
+</h1>
+
+
+<p>
+  Select a game below to play.
+</p>
+
+
+<div id="loading">
+  Loading games...
+</div>
+
+
+<div id="error"></div>
+
+
+<div id="file-list"></div>
+
+
+<a
+  class="back-button"
+  href="index.html"
+>
+  Return to Store
+</a>
+```
 
   </div>
 
+  <script>
+
+    async function getInternetArchiveFiles() {
+
+      const loading =
+        document.getElementById("loading");
+
+      const fileList =
+        document.getElementById("file-list");
+
+      const error =
+        document.getElementById("error");
+
+
+      try {
+
+        const response = await fetch(
+          "https://archive.org/metadata/ugsfiles"
+        );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Could not connect to Internet Archive."
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        const files = data.files
+
+          .map(file => file.name)
+
+          .filter(
+            name =>
+              name &&
+              name.toLowerCase().endsWith(".html")
+          )
+
+          .sort();
+
+
+        loading.style.display =
+          "none";
+
+
+        if (files.length === 0) {
+
+          error.textContent =
+            "No HTML files were found.";
+
+          return;
+
+        }
+
+
+        files.forEach(file => {
+
+          const link =
+            document.createElement("a");
+
+
+          link.href =
+            "https://archive.org/download/ugsfiles/" +
+            encodeURIComponent(file);
+
+
+          link.textContent =
+            file.replace(".html", "");
+
+
+          link.target =
+            "_blank";
+
+
+          link.rel =
+            "noopener noreferrer";
+
+
+          fileList.appendChild(link);
+
+        });
+
+      }
+
+
+      catch (err) {
+
+        loading.style.display =
+          "none";
+
+
+        error.textContent =
+          "Unable to load games: " +
+          err.message;
+
+      }
+
+    }
+
+
+    getInternetArchiveFiles();
+
+  </script>
 
 </body>
 
 </html>
-```
