@@ -133,7 +133,7 @@
 
     }
 
-    .google-doc-button {
+    .google-form-button {
 
       display: block;
 
@@ -157,7 +157,7 @@
 
     }
 
-    .google-doc-button:hover {
+    .google-form-button:hover {
       background: #15803d;
     }
 
@@ -389,7 +389,7 @@
   </div>
 
 
-  <!-- USER CHAT PAGE -->
+  <!-- USER PAGE -->
 
   <div
     class="box"
@@ -406,16 +406,18 @@
       You are logged in.
     </p>
 
-    <!-- GOOGLE DOC -->
+
+    <!-- GOOGLE FORM -->
 
     <a
-      class="google-doc-button"
-      href="PASTE_YOUR_GOOGLE_DOC_LINK_HERE"
+      class="google-form-button"
+      href="PASTE_YOUR_GOOGLE_FORM_LINK_HERE"
       target="_blank"
       rel="noopener noreferrer"
     >
-      Open Chatter
+      Open Chatter Form
     </a>
+
 
     <!-- ADMIN PANEL BUTTON -->
 
@@ -427,6 +429,7 @@
     >
       ⚙️ Admin Control Panel
     </button>
+
 
     <!-- LOG OUT -->
 
@@ -528,18 +531,24 @@
 
       const username =
         document
-          .getElementById("signupUsername")
+          .getElementById(
+            "signupUsername"
+          )
           .value
           .trim();
 
       const password =
         document
-          .getElementById("signupPassword")
+          .getElementById(
+            "signupPassword"
+          )
           .value;
 
       const confirmPassword =
         document
-          .getElementById("signupPasswordConfirm")
+          .getElementById(
+            "signupPasswordConfirm"
+          )
           .value;
 
 
