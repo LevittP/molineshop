@@ -20,6 +20,7 @@ content="width=device-width, initial-scale=1.0"
       box-sizing: border-box;
     }
 
+
     body {
 
       margin: 0;
@@ -55,7 +56,7 @@ content="width=device-width, initial-scale=1.0"
 
       box-shadow:
         0 2px 10px
-        rgba(0,0,0,.1);
+        rgba(0, 0, 0, .1);
 
     }
 
@@ -222,11 +223,11 @@ content="width=device-width, initial-scale=1.0"
 
 <body>
 
-  <!-- ========================= -->
+  <!-- ============================ -->
 
   <!-- GAME LIST -->
 
-  <!-- ========================= -->
+  <!-- ============================ -->
 
   <div id="game-list">
 
@@ -268,11 +269,11 @@ content="width=device-width, initial-scale=1.0"
 
   </div>
 
-  <!-- ========================= -->
+  <!-- ============================ -->
 
   <!-- GAME PLAYER -->
 
-  <!-- ========================= -->
+  <!-- ============================ -->
 
   <div id="game-container">
 
@@ -286,471 +287,25 @@ content="width=device-width, initial-scale=1.0"
 
 <iframe
   id="game-frame"
-  allow="autoplay; fullscreen; gamepad"
+  allow="
+    autoplay;
+    fullscreen;
+    gamepad
+  "
   allowfullscreen>
 </iframe>
 ```
 
   </div>
 
-  <script>
+  <!-- ============================ -->
 
+  <!-- JAVASCRIPT -->
 
-    /*
-    ========================================
-    INTERNET ARCHIVE SETTINGS
-    ========================================
-    */
+  <!-- ============================ -->
 
-
-    const ARCHIVE_DOWNLOAD_URL =
-      "https://archive.org/download/ugsfiles/";
-
-
-    const ARCHIVE_METADATA_URL =
-      "https://archive.org/metadata/ugsfiles";
-
-
-
-    /*
-    ========================================
-    GET ALL HTML FILES
-    ========================================
-    */
-
-
-    async function loadGames() {
-
-
-      const fileList =
-        document.getElementById(
-          "file-list"
-        );
-
-
-      const loading =
-        document.getElementById(
-          "loading"
-        );
-
-
-      try {
-
-
-        const response =
-          await fetch(
-            ARCHIVE_METADATA_URL
-          );
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Could not connect to Internet Archive."
-          );
-
-        }
-
-
-        const data =
-          await response.json();
-
-
-
-        /*
-        Get all filenames
-        */
-
-
-        const files =
-
-          data.files
-
-            .map(
-              file =>
-                file.name
-            )
-
-            .filter(
-
-              name =>
-
-                name &&
-
-                name
-                  .toLowerCase()
-                  .endsWith(
-                    ".html"
-                  )
-
-            )
-
-            .sort();
-
-
-
-        /*
-        Hide loading message
-        */
-
-
-        loading.style.display =
-          "none";
-
-
-
-        /*
-        No games found
-        */
-
-
-        if (
-          files.length === 0
-        ) {
-
-          fileList.innerHTML =
-
-            "<p>No games found.</p>";
-
-          return;
-
-        }
-
-
-
-        /*
-        Create game buttons
-        */
-
-
-        files.forEach(
-          file => {
-
-
-            const button =
-              document.createElement(
-                "div"
-              );
-
-
-            button.className =
-              "game-button";
-
-
-            /*
-            Remove .html
-            */
-
-
-            button.textContent =
-
-              file.replace(
-                /\.html$/i,
-                ""
-              );
-
-
-
-            /*
-            Open game
-            */
-
-
-            button.onclick =
-
-              function() {
-
-                openGame(
-                  file
-                );
-
-              };
-
-
-
-            fileList.appendChild(
-              button
-            );
-
-
-          }
-        );
-
-
-      }
-
-
-      catch (error) {
-
-
-        console.error(
-          error
-        );
-
-
-        loading.textContent =
-
-          "Could not load games.";
-
-
-      }
-
-    }
-
-
-
-    /*
-    ========================================
-    OPEN GAME
-    ========================================
-    */
-
-
-    async function openGame(
-      file
-    ) {
-
-
-      const gameList =
-        document.getElementById(
-          "game-list"
-        );
-
-
-      const gameContainer =
-        document.getElementById(
-          "game-container"
-        );
-
-
-      const gameFrame =
-        document.getElementById(
-          "game-frame"
-        );
-
-
-
-      /*
-      Show game player
-      */
-
-
-      gameList.style.display =
-        "none";
-
-
-      gameContainer.style.display =
-        "block";
-
-
-
-      /*
-      Show loading screen
-      */
-
-
-      gameFrame.srcdoc = `
-
-        <!DOCTYPE html>
-
-        <html>
-
-        <body style="
-          margin:0;
-          background:black;
-          color:white;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          height:100vh;
-          font-family:Arial;
-        ">
-
-          <h2>
-            Loading game...
-          </h2>
-
-        </body>
-
-        </html>
-
-      `;
-
-
-
-      try {
-
-
-        /*
-        Get HTML file
-        */
-
-
-        const response =
-
-          await fetch(
-
-            ARCHIVE_DOWNLOAD_URL +
-
-            encodeURIComponent(
-              file
-            )
-
-          );
-
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Could not load game."
-          );
-
-        }
-
-
-
-        /*
-        Get HTML source
-        */
-
-
-        const html =
-
-          await response.text();
-
-
-
-        /*
-        Run HTML inside iframe
-        */
-
-
-        gameFrame.srcdoc =
-          html;
-
-
-      }
-
-
-      catch (error) {
-
-
-        console.error(
-          error
-        );
-
-
-        /*
-        Show error
-        */
-
-
-        gameFrame.srcdoc = `
-
-          <!DOCTYPE html>
-
-          <html>
-
-          <body style="
-            margin:0;
-            background:black;
-            color:white;
-            text-align:center;
-            font-family:Arial;
-            padding-top:100px;
-          ">
-
-            <h1>
-              Game Failed to Load
-            </h1>
-
-            <p>
-              ${error.message}
-            </p>
-
-          </body>
-
-          </html>
-
-        `;
-
-      }
-
-    }
-
-
-
-    /*
-    ========================================
-    BACK BUTTON
-    ========================================
-    */
-
-
-    document
-      .getElementById(
-        "back-button"
-      )
-      .onclick =
-
-      function() {
-
-
-        /*
-        Stop game
-        */
-
-
-        document
-          .getElementById(
-            "game-frame"
-          )
-          .srcdoc = "";
-
-
-
-        /*
-        Hide player
-        */
-
-
-        document
-          .getElementById(
-            "game-container"
-          )
-          .style.display =
-          "none";
-
-
-
-        /*
-        Show game list
-        */
-
-
-        document
-          .getElementById(
-            "game-list"
-          )
-          .style.display =
-          "block";
-
-
-      };
-
-
-
-    /*
-    ========================================
-    START
-    ========================================
-    */
-
-
-    loadGames();
-
-
+  <script
+    src="games.js">
   </script>
 
 </body>
