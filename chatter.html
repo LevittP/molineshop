@@ -1,1 +1,900 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Community Chatter</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+color:#222;
+height:100vh;
+}
+
+header{
+height:80px;
+background:#7a0019;
+color:white;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:10px 25px;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo{
+width:55px;
+height:55px;
+object-fit:contain;
+background:white;
+padding:4px;
+border-radius:6px;
+}
+
+header button{
+background:white;
+color:#7a0019;
+border:0;
+padding:10px 16px;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.auth{
+height:calc(100vh - 80px);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.auth-box{
+background:white;
+padding:35px;
+border-radius:10px;
+width:100%;
+max-width:420px;
+box-shadow:0 10px 30px #0002;
+}
+
+.auth-box img{
+display:block;
+margin:auto;
+width:90px;
+height:90px;
+object-fit:contain;
+}
+
+.auth-box h2{
+text-align:center;
+color:#7a0019;
+margin:20px 0;
+}
+
+.auth-box input{
+width:100%;
+padding:13px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.auth-box button{
+width:100%;
+padding:13px;
+margin-top:10px;
+background:#7a0019;
+color:white;
+border:0;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.switch{
+text-align:center;
+margin-top:20px;
+color:#7a0019;
+cursor:pointer;
+}
+
+#app{
+display:none;
+height:calc(100vh - 80px);
+}
+
+.sidebar{
+width:260px;
+background:white;
+border-right:1px solid #ddd;
+padding:20px;
+}
+
+.sidebar h3{
+color:#7a0019;
+margin-bottom:15px;
+}
+
+.room{
+padding:12px;
+border-radius:5px;
+cursor:pointer;
+margin-bottom:5px;
+}
+
+.room:hover,
+.room.active{
+background:#f2e5e8;
+color:#7a0019;
+font-weight:bold;
+}
+
+.create-room{
+width:100%;
+padding:10px;
+margin-bottom:20px;
+background:#7a0019;
+color:white;
+border:0;
+border-radius:5px;
+cursor:pointer;
+}
+
+.chat{
+flex:1;
+display:flex;
+flex-direction:column;
+}
+
+.chat-header{
+background:white;
+padding:20px;
+border-bottom:1px solid #ddd;
+font-size:20px;
+font-weight:bold;
+}
+
+.messages{
+flex:1;
+overflow-y:auto;
+padding:25px;
+}
+
+.message{
+margin-bottom:18px;
+}
+
+.message-user{
+font-weight:bold;
+color:#7a0019;
+font-size:14px;
+}
+
+.message-text{
+margin-top:5px;
+background:white;
+display:inline-block;
+padding:10px 13px;
+border-radius:8px;
+box-shadow:0 2px 5px #0001;
+}
+
+.message img{
+display:block;
+max-width:300px;
+max-height:250px;
+border-radius:8px;
+margin-top:8px;
+}
+
+.composer{
+background:white;
+border-top:1px solid #ddd;
+padding:15px;
+display:flex;
+gap:10px;
+}
+
+.composer input{
+flex:1;
+padding:13px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.composer button{
+padding:0 18px;
+border:0;
+border-radius:5px;
+background:#7a0019;
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+.gif-panel{
+display:none;
+position:absolute;
+bottom:75px;
+right:20px;
+width:350px;
+max-width:90%;
+height:400px;
+background:white;
+border:1px solid #ddd;
+box-shadow:0 5px 25px #0003;
+border-radius:8px;
+padding:15px;
+z-index:5;
+}
+
+.gif-panel.open{
+display:block;
+}
+
+.gif-search{
+display:flex;
+gap:5px;
+}
+
+.gif-search input{
+flex:1;
+padding:10px;
+}
+
+.gif-search button{
+padding:10px;
+}
+
+.gif-results{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:15px;
+overflow-y:auto;
+height:320px;
+}
+
+.gif-results img{
+width:100%;
+height:120px;
+object-fit:cover;
+cursor:pointer;
+border-radius:5px;
+}
+
+@media(max-width:700px){
+
+.sidebar{
+width:150px;
+}
+
+header h1{
+font-size:16px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="brand">
+
+<img class="logo" src="assets/logo.jpg">
+
+<h1>Community Chatter</h1>
+
+</div>
+
+<div id="userArea"></div>
+
+</header>
+
+
+<div id="auth" class="auth">
+
+<div class="auth-box">
+
+<img src="assets/logo.jpg">
+
+<h2 id="authTitle">Sign In</h2>
+
+<input id="username" placeholder="Username">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="submitAuth()" id="authButton">
+Sign In
+</button>
+
+<p class="switch" onclick="toggleAuth()" id="switchText">
+Create an account
+</p>
+
+<p id="authMessage"></p>
+
+</div>
+
+</div>
+
+
+<div id="app">
+
+<aside class="sidebar">
+
+<h3>Chat Rooms</h3>
+
+<button class="create-room" onclick="createRoom()">
++ Create Room
+</button>
+
+<div id="rooms"></div>
+
+</aside>
+
+
+<main class="chat">
+
+<div class="chat-header" id="roomTitle">
+# General
+</div>
+
+<div class="messages" id="messages"></div>
+
+<div class="gif-panel" id="gifPanel">
+
+<div class="gif-search">
+
+<input
+id="gifSearch"
+placeholder="Search GIPHY..."
+>
+
+<button onclick="searchGifs()">
+Search
+</button>
+
+</div>
+
+<div class="gif-results" id="gifResults"></div>
+
+</div>
+
+<div class="composer">
+
+<input
+id="messageInput"
+placeholder="Type a message..."
+onkeydown="if(event.key==='Enter')sendMessage()"
+>
+
+<button onclick="toggleGifPanel()">
+GIF
+</button>
+
+<button onclick="sendMessage()">
+Send
+</button>
+
+</div>
+
+</main>
+
+</div>
+
+
+<script>
+
+let users=JSON.parse(
+localStorage.getItem("users")||"{}"
+);
+
+let rooms=JSON.parse(
+localStorage.getItem("rooms")||'["General","Gaming","School","Random"]'
+);
+
+let messages=JSON.parse(
+localStorage.getItem("messages")||"{}"
+);
+
+let currentUser=
+localStorage.getItem("currentUser");
+
+let currentRoom="General";
+
+let registerMode=false;
+
+
+function save(){
+
+localStorage.setItem(
+"users",
+JSON.stringify(users)
+);
+
+localStorage.setItem(
+"rooms",
+JSON.stringify(rooms)
+);
+
+localStorage.setItem(
+"messages",
+JSON.stringify(messages)
+);
+
+}
+
+
+function toggleAuth(){
+
+registerMode=!registerMode;
+
+document.getElementById("authTitle")
+.textContent=
+registerMode?
+"Create Account":
+"Sign In";
+
+document.getElementById("authButton")
+.textContent=
+registerMode?
+"Create Account":
+"Sign In";
+
+document.getElementById("switchText")
+.textContent=
+registerMode?
+"Already have an account? Sign In":
+"Create an account";
+
+document.getElementById("authMessage")
+.textContent="";
+
+}
+
+
+function submitAuth(){
+
+let username=
+document.getElementById("username")
+.value.trim();
+
+let password=
+document.getElementById("password")
+.value;
+
+let message=
+document.getElementById("authMessage");
+
+
+if(!username||!password){
+
+message.textContent=
+"Enter a username and password.";
+
+return;
+
+}
+
+
+if(registerMode){
+
+if(users[username]){
+
+message.textContent=
+"That username is already taken.";
+
+return;
+
+}
+
+users[username]={
+password:password
+};
+
+save();
+
+currentUser=username;
+
+localStorage.setItem(
+"currentUser",
+username
+);
+
+showApp();
+
+}else{
+
+if(
+!users[username]||
+users[username].password!==password
+){
+
+message.textContent=
+"Incorrect username or password.";
+
+return;
+
+}
+
+currentUser=username;
+
+localStorage.setItem(
+"currentUser",
+username
+);
+
+showApp();
+
+}
+
+}
+
+
+function showApp(){
+
+document.getElementById("auth")
+.style.display="none";
+
+document.getElementById("app")
+.style.display="flex";
+
+document.getElementById("userArea")
+.innerHTML=
+currentUser+
+' <button onclick="logout()">Logout</button>';
+
+renderRooms();
+
+loadRoom();
+
+}
+
+
+function logout(){
+
+localStorage.removeItem(
+"currentUser"
+);
+
+location.reload();
+
+}
+
+
+function renderRooms(){
+
+let container=
+document.getElementById("rooms");
+
+container.innerHTML="";
+
+rooms.forEach(room=>{
+
+let div=
+document.createElement("div");
+
+div.className=
+"room"+
+(room===currentRoom?" active":"");
+
+div.textContent="# "+room;
+
+div.onclick=()=>{
+
+currentRoom=room;
+
+document.getElementById("roomTitle")
+.textContent="# "+room;
+
+renderRooms();
+
+loadRoom();
+
+};
+
+container.appendChild(div);
+
+});
+
+}
+
+
+function createRoom(){
+
+let name=
+prompt("Enter a room name:");
+
+if(!name)return;
+
+name=name.trim();
+
+if(!name)return;
+
+if(rooms.includes(name)){
+
+alert("That room already exists.");
+
+return;
+
+}
+
+rooms.push(name);
+
+messages[name]=[];
+
+save();
+
+currentRoom=name;
+
+renderRooms();
+
+loadRoom();
+
+}
+
+
+function loadRoom(){
+
+let container=
+document.getElementById("messages");
+
+container.innerHTML="";
+
+if(!messages[currentRoom])
+messages[currentRoom]=[];
+
+messages[currentRoom]
+.forEach(message=>{
+
+renderMessage(message);
+
+});
+
+container.scrollTop=
+container.scrollHeight;
+
+}
+
+
+function renderMessage(message){
+
+let container=
+document.getElementById("messages");
+
+let div=
+document.createElement("div");
+
+div.className="message";
+
+let user=
+document.createElement("div");
+
+user.className="message-user";
+
+user.textContent=
+message.user;
+
+div.appendChild(user);
+
+
+if(message.text){
+
+let text=
+document.createElement("div");
+
+text.className="message-text";
+
+text.textContent=
+message.text;
+
+div.appendChild(text);
+
+}
+
+
+if(message.gif){
+
+let img=
+document.createElement("img");
+
+img.src=
+message.gif;
+
+img.alt="GIF";
+
+div.appendChild(img);
+
+}
+
+
+container.appendChild(div);
+
+}
+
+
+function sendMessage(){
+
+let input=
+document.getElementById(
+"messageInput"
+);
+
+let text=
+input.value.trim();
+
+if(!text)return;
+
+let message={
+
+user:currentUser,
+
+text:text,
+
+gif:null
+
+};
+
+if(!messages[currentRoom])
+messages[currentRoom]=[];
+
+messages[currentRoom]
+.push(message);
+
+save();
+
+renderMessage(message);
+
+input.value="";
+
+let container=
+document.getElementById("messages");
+
+container.scrollTop=
+container.scrollHeight;
+
+}
+
+
+function toggleGifPanel(){
+
+document
+.getElementById("gifPanel")
+.classList.toggle("open");
+
+}
+
+
+async function searchGifs(){
+
+let query=
+document.getElementById(
+"gifSearch"
+).value.trim();
+
+if(!query)return;
+
+let results=
+document.getElementById(
+"gifResults"
+);
+
+results.innerHTML=
+"<p>Searching...</p>";
+
+
+/*
+REPLACE THIS WITH YOUR
+GIPHY API KEY.
+*/
+
+const API_KEY=
+"YOUR_GIPHY_API_KEY";
+
+
+try{
+
+let response=
+await fetch(
+"https://api.giphy.com/v1/gifs/search?api_key="+
+API_KEY+
+"&q="+
+encodeURIComponent(query)+
+"&limit=20&rating=pg"
+);
+
+let data=
+await response.json();
+
+results.innerHTML="";
+
+
+data.data.forEach(gif=>{
+
+let img=
+document.createElement("img");
+
+img.src=
+gif.images.fixed_width.url;
+
+img.onclick=()=>sendGif(
+gif.images.original.url
+);
+
+results.appendChild(img);
+
+});
+
+}catch(error){
+
+results.innerHTML=
+"<p>Unable to load GIFs.</p>";
+
+}
+
+}
+
+
+function sendGif(url){
+
+let message={
+
+user:currentUser,
+
+text:null,
+
+gif:url
+
+};
+
+if(!messages[currentRoom])
+messages[currentRoom]=[];
+
+messages[currentRoom]
+.push(message);
+
+save();
+
+renderMessage(message);
+
+document
+.getElementById("gifPanel")
+.classList.remove("open");
+
+}
+
+
+if(currentUser&&users[currentUser]){
+
+showApp();
+
+}
+
+</script>
+
+</body>
+</html>
+```
