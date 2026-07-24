@@ -15,10 +15,14 @@ let currentGameURL = null;
 async function loadGames() {
 
 const fileList =
-document.getElementById("file-list");
+document.getElementById(
+"file-list"
+);
 
 const loading =
-document.getElementById("loading");
+document.getElementById(
+"loading"
+);
 
 try {
 
@@ -40,6 +44,11 @@ if (!response.ok) {
 
 const data =
   await response.json();
+
+
+/*
+Get all HTML files
+*/
 
 
 const files =
@@ -70,6 +79,11 @@ loading.style.display =
   "none";
 
 
+/*
+Check if there are no games
+*/
+
+
 if (
   files.length === 0
 ) {
@@ -82,8 +96,14 @@ if (
 }
 
 
+/*
+Create buttons
+*/
+
+
 files.forEach(
   file => {
+
 
     const button =
       document.createElement(
@@ -95,6 +115,12 @@ files.forEach(
       "game-button";
 
 
+    /*
+    Display filename
+    without .html
+    */
+
+
     button.textContent =
       file.replace(
         /\.html$/i,
@@ -102,13 +128,21 @@ files.forEach(
       );
 
 
+    /*
+    Open game
+    */
+
+
     button.onclick =
-      () => openGame(file);
+      () => openGame(
+        file
+      );
 
 
     fileList.appendChild(
       button
     );
+
 
   }
 );
@@ -138,7 +172,9 @@ loading.textContent =
 
 */
 
-async function openGame(file) {
+async function openGame(
+file
+) {
 
 const gameList =
 document.getElementById(
@@ -155,11 +191,23 @@ document.getElementById(
 "game-frame"
 );
 
+/*
+Hide game list
+*/
+
 gameList.style.display =
 "none";
 
+/*
+Show game
+*/
+
 gameContainer.style.display =
 "block";
+
+/*
+Show loading message
+*/
 
 gameFrame.srcdoc = `
 
@@ -169,14 +217,14 @@ gameFrame.srcdoc = `
 <html>
 
 <body style="
-  margin:0;
-  background:black;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:100vh;
-  font-family:Arial;
+  margin: 0;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial;
 ">
 
   <h2>
@@ -194,8 +242,10 @@ try {
 
 ```
 /*
-Fetch the HTML game launcher
+Fetch HTML from
+Internet Archive
 */
+
 
 const response =
 
@@ -219,26 +269,41 @@ if (!response.ok) {
 }
 
 
+/*
+Get HTML code
+*/
+
+
 let html =
   await response.text();
 
 
 /*
-Add Internet Archive as
-the base URL for resources
+Set Internet Archive
+as base URL
 */
+
 
 const baseURL =
   ARCHIVE_DOWNLOAD_URL;
+
+
+/*
+Add <base> tag
+if one doesn't exist
+*/
 
 
 if (
 
   !html
     .toLowerCase()
-    .includes("<base")
+    .includes(
+      "<base"
+    )
 
 ) {
+
 
   html = html.replace(
 
@@ -254,10 +319,12 @@ if (
 
 
 /*
-Create a temporary HTML file
+Create HTML Blob
 */
 
+
 const blob =
+
   new Blob(
 
     [html],
@@ -274,7 +341,9 @@ const blob =
 Create temporary URL
 */
 
+
 currentGameURL =
+
   URL.createObjectURL(
     blob
   );
@@ -283,6 +352,7 @@ currentGameURL =
 /*
 Load game
 */
+
 
 gameFrame.src =
   currentGameURL;
@@ -298,6 +368,11 @@ console.error(
 );
 
 
+/*
+Display error
+*/
+
+
 gameFrame.srcdoc = `
 
   <!DOCTYPE html>
@@ -305,11 +380,12 @@ gameFrame.srcdoc = `
   <html>
 
   <body style="
-    background:black;
-    color:white;
-    text-align:center;
-    font-family:Arial;
-    padding-top:100px;
+    margin: 0;
+    background: black;
+    color: white;
+    text-align: center;
+    font-family: Arial;
+    padding-top: 100px;
   ">
 
     <h1>
@@ -338,41 +414,53 @@ gameFrame.srcdoc = `
 */
 
 const backButton =
+
 document.getElementById(
 "back-button"
 );
 
-if (backButton) {
+if (
+backButton
+) {
 
 backButton.onclick =
-function() {
 
 ```
+function() {
+
+
   const gameFrame =
+
     document.getElementById(
       "game-frame"
     );
 
 
   /*
-  Stop the game
+  Stop game
   */
+
 
   gameFrame.src =
     "about:blank";
 
 
   /*
-  Delete temporary Blob URL
+  Delete Blob URL
   */
+
 
   if (
     currentGameURL
   ) {
 
+
     URL.revokeObjectURL(
+
       currentGameURL
+
     );
+
 
     currentGameURL =
       null;
@@ -381,8 +469,9 @@ function() {
 
 
   /*
-  Hide game player
+  Hide game
   */
+
 
   document
     .getElementById(
@@ -393,8 +482,9 @@ function() {
 
 
   /*
-  Show game list
+  Show games
   */
+
 
   document
     .getElementById(
@@ -403,6 +493,7 @@ function() {
     .style.display =
     "block";
 
+
 };
 ```
 
@@ -410,7 +501,7 @@ function() {
 
 # /*
 
-# START WEBSITE
+# START
 
 */
 
