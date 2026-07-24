@@ -2,7 +2,7 @@ const ARCHIVE_DOWNLOAD_URL =
 "https://archive.org/download/ugsfiles/";
 
 const ARCHIVE_METADATA_URL =
-"https://archive.org/metadata/ugsfiles";
+"https://archive.org/metadata/ugsfiles?format=json";
 
 let currentGameURL = null;
 
@@ -27,6 +27,11 @@ document.getElementById(
 try {
 
 ```
+console.log(
+  "Loading Internet Archive files..."
+);
+
+
 const response =
   await fetch(
     ARCHIVE_METADATA_URL
@@ -36,7 +41,8 @@ const response =
 if (!response.ok) {
 
   throw new Error(
-    "Internet Archive connection failed."
+    "Internet Archive returned HTTP " +
+    response.status
   );
 
 }
@@ -44,6 +50,17 @@ if (!response.ok) {
 
 const data =
   await response.json();
+
+
+if (
+  !data.files
+) {
+
+  throw new Error(
+    "No files found."
+  );
+
+}
 
 
 /*
@@ -75,12 +92,18 @@ const files =
     .sort();
 
 
+console.log(
+  "Found games:",
+  files.length
+);
+
+
 loading.style.display =
   "none";
 
 
 /*
-Check if there are no games
+No games
 */
 
 
@@ -89,7 +112,8 @@ if (
 ) {
 
   fileList.innerHTML =
-    "<p>No games found.</p>";
+
+    "<p>No HTML games found.</p>";
 
   return;
 
@@ -97,7 +121,7 @@ if (
 
 
 /*
-Create buttons
+Create game buttons
 */
 
 
@@ -115,28 +139,24 @@ files.forEach(
       "game-button";
 
 
-    /*
-    Display filename
-    without .html
-    */
-
-
     button.textContent =
+
       file.replace(
         /\.html$/i,
         ""
       );
 
 
-    /*
-    Open game
-    */
+    button.addEventListener(
 
+      "click",
 
-    button.onclick =
-      () => openGame(
-        file
-      );
+      () =>
+        openGame(
+          file
+        )
+
+    );
 
 
     fileList.appendChild(
@@ -154,12 +174,27 @@ catch (error) {
 
 ```
 console.error(
+  "Game loading error:",
   error
 );
 
 
-loading.textContent =
-  "Could not load games.";
+loading.innerHTML = `
+
+  <p>
+    Could not load games.
+  </p>
+
+  <p style="
+    color: #999;
+    font-size: 14px;
+  ">
+
+    ${error.message}
+
+  </p>
+
+`;
 ```
 
 }
@@ -199,14 +234,14 @@ gameList.style.display =
 "none";
 
 /*
-Show game
+Show game player
 */
 
 gameContainer.style.display =
 "block";
 
 /*
-Show loading message
+Show loading screen
 */
 
 gameFrame.srcdoc = `
@@ -242,8 +277,7 @@ try {
 
 ```
 /*
-Fetch HTML from
-Internet Archive
+Get game HTML
 */
 
 
@@ -263,34 +297,25 @@ const response =
 if (!response.ok) {
 
   throw new Error(
-    "Could not fetch game."
+    "Could not fetch game. HTTP " +
+    response.status
   );
 
 }
 
 
 /*
-Get HTML code
+Read HTML
 */
 
 
 let html =
+
   await response.text();
 
 
 /*
-Set Internet Archive
-as base URL
-*/
-
-
-const baseURL =
-  ARCHIVE_DOWNLOAD_URL;
-
-
-/*
-Add <base> tag
-if one doesn't exist
+Add base URL
 */
 
 
@@ -310,7 +335,9 @@ if (
     /<head([^>]*)>/i,
 
     `<head$1>
-      <base href="${baseURL}">
+
+      <base href="${ARCHIVE_DOWNLOAD_URL}">
+
     `
 
   );
@@ -319,7 +346,7 @@ if (
 
 
 /*
-Create HTML Blob
+Create Blob
 */
 
 
@@ -364,13 +391,9 @@ catch (error) {
 
 ```
 console.error(
+  "Game error:",
   error
 );
-
-
-/*
-Display error
-*/
 
 
 gameFrame.srcdoc = `
@@ -469,7 +492,7 @@ function() {
 
 
   /*
-  Hide game
+  Hide player
   */
 
 
