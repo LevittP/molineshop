@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,45 +8,69 @@
   <title>Moline Community Schools Official Store</title>
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: #f6f6f6;
+      background: #f5f5f5;
       color: #222;
     }
 
-    /* TOP BAR */
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================= */
 
     .top-bar {
-      background: #262626;
+      background: #252525;
       color: white;
-      padding: 9px 6%;
+      padding: 9px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 13px;
     }
 
-    .top-bar a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
+    .top-links {
+      display: flex;
+      gap: 20px;
     }
 
-    /* HEADER */
+    .top-links a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .top-links a:hover {
+      text-decoration: underline;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
       background: #7a0019;
       color: white;
-      padding: 20px 6%;
+      padding: 18px 5%;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      gap: 25px;
     }
 
     .brand {
@@ -54,49 +79,87 @@
       gap: 15px;
     }
 
-    .logo {
-      width: 58px;
-      height: 58px;
+    .brand-logo {
+      width: 65px;
+      height: 65px;
       background: white;
-      color: #7a0019;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 18px;
+      padding: 5px;
+      border-radius: 6px;
+      object-fit: contain;
     }
 
-    .brand h1 {
+    .brand-text h1 {
       font-size: 23px;
+      line-height: 1.2;
     }
 
-    .brand p {
+    .brand-text p {
       font-size: 13px;
+      margin-top: 5px;
       opacity: .85;
-      margin-top: 4px;
     }
 
-    .cart {
-      background: white;
-      color: #7a0019;
-      padding: 12px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-container {
+      flex: 1;
+      max-width: 500px;
+      display: flex;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 13px 16px;
+      border: none;
+      outline: none;
+      border-radius: 5px 0 0 5px;
+      font-size: 15px;
+    }
+
+    .search-container button {
+      padding: 0 20px;
+      border: none;
+      background: #252525;
+      color: white;
+      border-radius: 0 5px 5px 0;
       cursor: pointer;
     }
 
-    .cart:hover {
-      background: #eee;
+
+    /* =========================
+       CART BUTTON
+    ========================= */
+
+    .cart-button {
+      background: white;
+      color: #7a0019;
+      border: none;
+      padding: 13px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
-    /* NAVIGATION */
+    .cart-button:hover {
+      background: #eeeeee;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     nav {
       background: white;
       border-bottom: 1px solid #ddd;
       box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     nav ul {
@@ -108,10 +171,11 @@
 
     nav a {
       display: block;
-      padding: 17px 25px;
+      padding: 16px 25px;
       color: #333;
       text-decoration: none;
       font-weight: bold;
+      font-size: 14px;
     }
 
     nav a:hover {
@@ -119,14 +183,18 @@
       background: #f5f5f5;
     }
 
-    /* HERO */
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
-      min-height: 430px;
+      min-height: 480px;
+
       background:
         linear-gradient(
-          rgba(0,0,0,.55),
-          rgba(0,0,0,.55)
+          rgba(0,0,0,.58),
+          rgba(0,0,0,.58)
         ),
         url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=80")
         center / cover;
@@ -134,24 +202,36 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
       text-align: center;
       color: white;
-      padding: 50px 20px;
+
+      padding: 60px 20px;
     }
 
     .hero-content {
-      max-width: 700px;
+      max-width: 750px;
+    }
+
+    .hero-logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      background: white;
+      padding: 8px;
+      border-radius: 8px;
+      margin-bottom: 25px;
     }
 
     .hero h2 {
       font-size: 52px;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .hero p {
       font-size: 20px;
       line-height: 1.6;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
     }
 
     .hero-button {
@@ -159,54 +239,61 @@
       background: #7a0019;
       color: white;
       text-decoration: none;
-      padding: 15px 30px;
-      border-radius: 4px;
+      padding: 15px 35px;
+      border-radius: 5px;
       font-weight: bold;
-      font-size: 16px;
     }
 
     .hero-button:hover {
       background: #a00022;
     }
 
-    /* SHOP */
+
+    /* =========================
+       SHOP
+    ========================= */
 
     .shop {
       max-width: 1250px;
-      margin: 50px auto;
+      margin: 60px auto;
       padding: 0 20px;
     }
 
     .shop-header {
-      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
       border-bottom: 3px solid #7a0019;
       padding-bottom: 15px;
+      margin-bottom: 30px;
     }
 
     .shop-header h2 {
       color: #7a0019;
-      font-size: 30px;
+      font-size: 32px;
     }
 
     .shop-header p {
       color: #666;
-      margin-top: 5px;
     }
 
-    /* CATEGORIES */
+
+    /* =========================
+       CATEGORY FILTERS
+    ========================= */
 
     .categories {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 35px;
-      flex-wrap: wrap;
     }
 
     .category {
+      padding: 11px 20px;
       background: white;
       border: 1px solid #ddd;
-      padding: 12px 20px;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
       font-weight: bold;
     }
@@ -218,7 +305,10 @@
       border-color: #7a0019;
     }
 
-    /* PRODUCTS */
+
+    /* =========================
+       PRODUCTS
+    ========================= */
 
     .products {
       display: grid;
@@ -229,24 +319,37 @@
     .product {
       background: white;
       border: 1px solid #ddd;
-      border-radius: 5px;
+      border-radius: 7px;
       overflow: hidden;
       transition: .2s;
     }
 
     .product:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    }
+
+    .product.hidden {
+      display: none;
     }
 
     .product-image {
-      height: 250px;
-      background: #eee;
+      height: 260px;
+      background: #eeeeee;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #777;
-      font-size: 70px;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-placeholder {
+      font-size: 65px;
     }
 
     .product-info {
@@ -255,58 +358,59 @@
 
     .product-info h3 {
       font-size: 18px;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
     .product-info p {
       color: #777;
       font-size: 14px;
-      margin-bottom: 15px;
+      min-height: 40px;
     }
 
     .price {
       color: #7a0019;
       font-size: 20px;
       font-weight: bold;
-      margin-bottom: 15px;
+      margin: 15px 0;
     }
 
     .add-button {
       width: 100%;
+      padding: 13px;
       background: #7a0019;
       color: white;
       border: none;
-      padding: 13px;
-      border-radius: 4px;
-      font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 15px;
+      font-weight: bold;
     }
 
     .add-button:hover {
       background: #a00022;
     }
 
-    /* INFO */
+
+    /* =========================
+       INFO
+    ========================= */
 
     .info-banner {
       background: white;
       border-top: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
-      padding: 35px 7%;
+
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      text-align: center;
-      gap: 30px;
-    }
 
-    .info-box {
-      padding: 10px;
+      text-align: center;
+
+      padding: 45px 7%;
+      gap: 30px;
     }
 
     .info-box span {
       display: block;
-      font-size: 32px;
+      font-size: 35px;
       margin-bottom: 10px;
     }
 
@@ -319,12 +423,15 @@
       font-size: 14px;
     }
 
-    /* FOOTER */
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       background: #252525;
       color: white;
-      padding: 45px 7%;
+      padding: 50px 7%;
     }
 
     .footer-grid {
@@ -333,6 +440,22 @@
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
       gap: 50px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .footer-logo {
+      width: 55px;
+      height: 55px;
+      background: white;
+      padding: 5px;
+      border-radius: 5px;
+      object-fit: contain;
     }
 
     footer h3 {
@@ -352,7 +475,7 @@
 
     .copyright {
       max-width: 1200px;
-      margin: 30px auto 0;
+      margin: 35px auto 0;
       padding-top: 20px;
       border-top: 1px solid #555;
       text-align: center;
@@ -360,46 +483,183 @@
       font-size: 13px;
     }
 
-    /* CHECKOUT POPUP */
 
-    #checkout {
+    /* =========================
+       CART SIDEBAR
+    ========================= */
+
+    .cart-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.65);
+      background: rgba(0,0,0,.55);
+      z-index: 1000;
+      display: none;
+    }
+
+    .cart-overlay.open {
+      display: block;
+    }
+
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -450px;
+      width: 430px;
+      max-width: 100%;
+      height: 100vh;
+      background: white;
+      z-index: 1001;
       display: flex;
+      flex-direction: column;
+      transition: right .3s ease;
+    }
+
+    .cart-sidebar.open {
+      right: 0;
+    }
+
+    .cart-header {
+      background: #7a0019;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      z-index: 9999;
+    }
+
+    .cart-header button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
       padding: 20px;
     }
 
-    .checkout-box {
-      background: white;
-      width: 100%;
-      max-width: 500px;
-      max-height: 90vh;
-      overflow: auto;
-      border-radius: 8px;
-      padding: 30px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.3);
-    }
-
-    .checkout-box h2 {
-      color: #7a0019;
-      margin-bottom: 20px;
+    .empty-cart {
+      text-align: center;
+      color: #777;
+      padding: 50px 20px;
     }
 
     .cart-item {
       display: flex;
       justify-content: space-between;
-      padding: 10px 0;
+      gap: 15px;
+      padding: 15px 0;
       border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-info h4 {
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      color: #7a0019;
+      font-weight: bold;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .quantity-controls button {
+      width: 27px;
+      height: 27px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .remove-item {
+      color: #a00022;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .cart-footer {
+      border-top: 1px solid #ddd;
+      padding: 20px;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .checkout-button {
+      width: 100%;
+      padding: 15px;
+      background: #7a0019;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .checkout-button:hover {
+      background: #a00022;
+    }
+
+
+    /* =========================
+       CHECKOUT MODAL
+    ========================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      width: 100%;
+      max-width: 550px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 8px;
+      padding: 30px;
+    }
+
+    .modal-box h2 {
+      color: #7a0019;
+      margin-bottom: 20px;
     }
 
     .discount-area {
       display: flex;
       gap: 8px;
-      margin-top: 8px;
+      margin: 20px 0;
     }
 
     .discount-area input {
@@ -410,7 +670,7 @@
     }
 
     .discount-area button {
-      padding: 12px 16px;
+      padding: 12px 18px;
       background: #333;
       color: white;
       border: none;
@@ -419,55 +679,59 @@
     }
 
     #discountMessage {
-      margin-top: 10px;
+      font-size: 14px;
       font-weight: bold;
+      margin-bottom: 15px;
     }
 
-    .checkout-button {
-      width: 100%;
-      padding: 15px;
-      background: #7a0019;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-
-    .close-button {
-      width: 100%;
+    .demo-notice {
+      background: #fff4f4;
+      border: 1px solid #e0b5b5;
+      color: #7a0019;
       padding: 12px;
+      border-radius: 5px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .close-modal {
+      width: 100%;
       margin-top: 10px;
+      padding: 12px;
       background: #eee;
-      color: #333;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
     }
 
-    /* RESPONSIVE */
 
-    @media (max-width: 1000px) {
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1100px) {
+
+      .products {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      header {
+        flex-wrap: wrap;
+      }
+
+      .search-container {
+        order: 3;
+        max-width: none;
+        width: 100%;
+      }
+
+    }
+
+
+    @media (max-width: 800px) {
+
       .products {
         grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 700px) {
-      header {
-        gap: 20px;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .brand {
-        justify-content: center;
-      }
-
-      .hero h2 {
-        font-size: 38px;
       }
 
       .info-banner {
@@ -477,43 +741,82 @@
       .footer-grid {
         grid-template-columns: 1fr;
       }
+
+      .shop-header {
+        display: block;
+      }
+
     }
 
-    @media (max-width: 500px) {
-      .products {
-        grid-template-columns: 1fr;
-      }
+
+    @media (max-width: 600px) {
 
       .top-bar {
         display: none;
       }
 
-      nav a {
-        padding: 12px;
-        font-size: 13px;
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .brand {
+        justify-content: center;
+      }
+
+      .search-container {
+        width: 100%;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
       }
 
       .hero h2 {
-        font-size: 30px;
+        font-size: 35px;
       }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      nav a {
+        padding: 12px 10px;
+        font-size: 12px;
+      }
+
     }
+
   </style>
+
 </head>
 
+
 <body>
+
 
   <!-- TOP BAR -->
 
   <div class="top-bar">
 
-    <div>
+    <span>
       Official School Merchandise Store
-    </div>
+    </span>
 
-    <div>
-      <a href="#">Help</a>
-      <a href="#">Contact</a>
-      <a href="#">Track Order</a>
+    <div class="top-links">
+
+      <a href="#">
+        Help
+      </a>
+
+      <a href="#">
+        Contact
+      </a>
+
+      <a href="#">
+        Track Order
+      </a>
+
     </div>
 
   </div>
@@ -525,35 +828,91 @@
 
     <div class="brand">
 
-      <div class="logo">
-        MCS
-      </div>
+      <img
+        class="brand-logo"
+        src="assets/logo.jpg"
+        alt="Moline Community Schools Logo"
+      >
 
-      <div>
-        <h1>Moline Community Schools</h1>
-        <p>Official School Store</p>
+      <div class="brand-text">
+
+        <h1>
+          Moline Community Schools
+        </h1>
+
+        <p>
+          Official School Store
+        </p>
+
       </div>
 
     </div>
 
-    <a class="cart" id="cartButton">
-      🛒 Cart (0)
-    </a>
+
+    <div class="search-container">
+
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Search products..."
+      >
+
+      <button onclick="searchProducts()">
+        Search
+      </button>
+
+    </div>
+
+
+    <button
+      class="cart-button"
+      onclick="openCart()"
+    >
+
+      🛒 Cart
+      (<span id="cartCount">0</span>)
+
+    </button>
 
   </header>
 
 
-  <!-- NAVIGATION -->
+  <!-- NAV -->
 
   <nav>
 
     <ul>
-      <li><a href="#shop">Shop All</a></li>
-      <li><a href="#shop">Apparel</a></li>
-      <li><a href="#shop">Hats</a></li>
-      <li><a href="#shop">Accessories</a></li>
-      <li><a href="#shop">Spirit Wear</a></li>
-      <li><a href="#shop">Schools</a></li>
+
+      <li>
+        <a href="#shop">
+          Shop All
+        </a>
+      </li>
+
+      <li>
+        <a href="#shop">
+          Apparel
+        </a>
+      </li>
+
+      <li>
+        <a href="#shop">
+          Spirit Wear
+        </a>
+      </li>
+
+      <li>
+        <a href="#shop">
+          Accessories
+        </a>
+      </li>
+
+      <li>
+        <a href="#shop">
+          Schools
+        </a>
+      </li>
+
     </ul>
 
   </nav>
@@ -565,14 +924,25 @@
 
     <div class="hero-content">
 
-      <h2>Show Your School Spirit</h2>
+      <img
+        class="hero-logo"
+        src="assets/logo.jpg"
+        alt="Moline Community Schools Logo"
+      >
+
+      <h2>
+        Show Your School Spirit
+      </h2>
 
       <p>
-        Shop official Moline Community Schools apparel,
-        accessories, and spirit wear.
+        Shop official Moline Community Schools
+        apparel, accessories, and spirit wear.
       </p>
 
-      <a href="#shop" class="hero-button">
+      <a
+        href="#shop"
+        class="hero-button"
+      >
         Shop Now
       </a>
 
@@ -583,15 +953,25 @@
 
   <!-- SHOP -->
 
-  <main class="shop" id="shop">
+  <main
+    class="shop"
+    id="shop"
+  >
 
     <div class="shop-header">
 
-      <h2>Featured Products</h2>
+      <div>
 
-      <p>
-        Official merchandise for students, families, and fans.
-      </p>
+        <h2>
+          Featured Products
+        </h2>
+
+        <p>
+          Official merchandise for students,
+          families, and fans.
+        </p>
+
+      </div>
 
     </div>
 
@@ -600,25 +980,40 @@
 
     <div class="categories">
 
-      <div class="category active">
+      <button
+        class="category active"
+        onclick="filterProducts('all', this)"
+      >
         All Products
-      </div>
+      </button>
 
-      <div class="category">
+      <button
+        class="category"
+        onclick="filterProducts('apparel', this)"
+      >
         Apparel
-      </div>
+      </button>
 
-      <div class="category">
+      <button
+        class="category"
+        onclick="filterProducts('spirit', this)"
+      >
         Spirit Wear
-      </div>
+      </button>
 
-      <div class="category">
+      <button
+        class="category"
+        onclick="filterProducts('accessories', this)"
+      >
         Accessories
-      </div>
+      </button>
 
-      <div class="category">
+      <button
+        class="category"
+        onclick="filterProducts('hats', this)"
+      >
         Hats
-      </div>
+      </button>
 
     </div>
 
@@ -627,25 +1022,39 @@
 
     <div class="products">
 
-      <div class="product">
+
+      <div
+        class="product"
+        data-category="apparel"
+        data-name="Moline Schools T-Shirt"
+      >
 
         <div class="product-image">
-          👕
+
+          <div class="product-placeholder">
+            👕
+          </div>
+
         </div>
 
         <div class="product-info">
 
-          <h3>Moline Schools T-Shirt</h3>
+          <h3>
+            Moline Schools T-Shirt
+          </h3>
 
           <p>
-            Classic school logo tee.
+            Classic school spirit shirt.
           </p>
 
           <div class="price">
             $20.00
           </div>
 
-          <button class="add-button">
+          <button
+            class="add-button"
+            onclick="addToCart('Moline Schools T-Shirt', 20)"
+          >
             Add to Cart
           </button>
 
@@ -654,15 +1063,25 @@
       </div>
 
 
-      <div class="product">
+      <div
+        class="product"
+        data-category="apparel spirit"
+        data-name="School Spirit Hoodie"
+      >
 
         <div class="product-image">
-          🧥
+
+          <div class="product-placeholder">
+            🧥
+          </div>
+
         </div>
 
         <div class="product-info">
 
-          <h3>School Spirit Hoodie</h3>
+          <h3>
+            School Spirit Hoodie
+          </h3>
 
           <p>
             Comfortable heavyweight hoodie.
@@ -672,7 +1091,10 @@
             $45.00
           </div>
 
-          <button class="add-button">
+          <button
+            class="add-button"
+            onclick="addToCart('School Spirit Hoodie', 45)"
+          >
             Add to Cart
           </button>
 
@@ -681,15 +1103,25 @@
       </div>
 
 
-      <div class="product">
+      <div
+        class="product"
+        data-category="hats"
+        data-name="Classic Moline Cap"
+      >
 
         <div class="product-image">
-          🧢
+
+          <div class="product-placeholder">
+            🧢
+          </div>
+
         </div>
 
         <div class="product-info">
 
-          <h3>Classic Moline Cap</h3>
+          <h3>
+            Classic Moline Cap
+          </h3>
 
           <p>
             Adjustable embroidered school cap.
@@ -699,7 +1131,10 @@
             $22.00
           </div>
 
-          <button class="add-button">
+          <button
+            class="add-button"
+            onclick="addToCart('Classic Moline Cap', 22)"
+          >
             Add to Cart
           </button>
 
@@ -708,15 +1143,25 @@
       </div>
 
 
-      <div class="product">
+      <div
+        class="product"
+        data-category="accessories"
+        data-name="School Backpack"
+      >
 
         <div class="product-image">
-          🎒
+
+          <div class="product-placeholder">
+            🎒
+          </div>
+
         </div>
 
         <div class="product-info">
 
-          <h3>School Backpack</h3>
+          <h3>
+            School Backpack
+          </h3>
 
           <p>
             Durable everyday backpack.
@@ -726,7 +1171,10 @@
             $35.00
           </div>
 
-          <button class="add-button">
+          <button
+            class="add-button"
+            onclick="addToCart('School Backpack', 35)"
+          >
             Add to Cart
           </button>
 
@@ -735,15 +1183,25 @@
       </div>
 
 
-      <div class="product">
+      <div
+        class="product"
+        data-category="apparel"
+        data-name="Classic School Crewneck"
+      >
 
         <div class="product-image">
-          👚
+
+          <div class="product-placeholder">
+            👚
+          </div>
+
         </div>
 
         <div class="product-info">
 
-          <h3>Classic School Crewneck</h3>
+          <h3>
+            Classic School Crewneck
+          </h3>
 
           <p>
             Soft cotton school sweatshirt.
@@ -753,7 +1211,10 @@
             $38.00
           </div>
 
-          <button class="add-button">
+          <button
+            class="add-button"
+            onclick="addToCart('Classic School Crewneck', 38)"
+          >
             Add to Cart
           </button>
 
@@ -762,15 +1223,25 @@
       </div>
 
 
-      <div class="product">
+      <div
+        class="product"
+        data-category="accessories"
+        data-name="School Logo Tumbler"
+      >
 
         <div class="product-image">
-          🥤
+
+          <div class="product-placeholder">
+            🥤
+          </div>
+
         </div>
 
         <div class="product-info">
 
-          <h3>School Logo Tumbler</h3>
+          <h3>
+            School Logo Tumbler
+          </h3>
 
           <p>
             Reusable insulated drink tumbler.
@@ -780,7 +1251,10 @@
             $18.00
           </div>
 
-          <button class="add-button">
+          <button
+            class="add-button"
+            onclick="addToCart('School Logo Tumbler', 18)"
+          >
             Add to Cart
           </button>
 
@@ -789,15 +1263,25 @@
       </div>
 
 
-      <div class="product">
+      <div
+        class="product"
+        data-category="spirit"
+        data-name="Spirit Socks"
+      >
 
         <div class="product-image">
-          🧦
+
+          <div class="product-placeholder">
+            🧦
+          </div>
+
         </div>
 
         <div class="product-info">
 
-          <h3>Spirit Socks</h3>
+          <h3>
+            Spirit Socks
+          </h3>
 
           <p>
             Comfortable school spirit socks.
@@ -807,7 +1291,10 @@
             $12.00
           </div>
 
-          <button class="add-button">
+          <button
+            class="add-button"
+            onclick="addToCart('Spirit Socks', 12)"
+          >
             Add to Cart
           </button>
 
@@ -816,15 +1303,25 @@
       </div>
 
 
-      <div class="product">
+      <div
+        class="product"
+        data-category="accessories"
+        data-name="School Notebook"
+      >
 
         <div class="product-image">
-          📓
+
+          <div class="product-placeholder">
+            📓
+          </div>
+
         </div>
 
         <div class="product-info">
 
-          <h3>School Notebook</h3>
+          <h3>
+            School Notebook
+          </h3>
 
           <p>
             Official school notebook.
@@ -834,13 +1331,17 @@
             $8.00
           </div>
 
-          <button class="add-button">
+          <button
+            class="add-button"
+            onclick="addToCart('School Notebook', 8)"
+          >
             Add to Cart
           </button>
 
         </div>
 
       </div>
+
 
     </div>
 
@@ -853,9 +1354,13 @@
 
     <div class="info-box">
 
-      <span>🚚</span>
+      <span>
+        🚚
+      </span>
 
-      <h3>Fast Shipping</h3>
+      <h3>
+        Fast Shipping
+      </h3>
 
       <p>
         Orders are shipped directly to your home.
@@ -866,12 +1371,16 @@
 
     <div class="info-box">
 
-      <span>🔒</span>
+      <span>
+        🔒
+      </span>
 
-      <h3>Secure Checkout</h3>
+      <h3>
+        Secure Checkout
+      </h3>
 
       <p>
-        Your payment information is protected.
+        Your information is protected.
       </p>
 
     </div>
@@ -879,12 +1388,16 @@
 
     <div class="info-box">
 
-      <span>🏫</span>
+      <span>
+        🏫
+      </span>
 
-      <h3>Official Merchandise</h3>
+      <h3>
+        Official Merchandise
+      </h3>
 
       <p>
-        Shop officially licensed school products.
+        Shop school spirit merchandise.
       </p>
 
     </div>
@@ -898,9 +1411,22 @@
 
     <div class="footer-grid">
 
+
       <div>
 
-        <h3>Moline Community Schools</h3>
+        <div class="footer-brand">
+
+          <img
+            class="footer-logo"
+            src="assets/logo.jpg"
+            alt="Moline Community Schools Logo"
+          >
+
+          <h3>
+            Moline Community Schools
+          </h3>
+
+        </div>
 
         <p>
           Official School Store
@@ -916,110 +1442,513 @@
 
       <div>
 
-        <h3>Customer Service</h3>
+        <h3>
+          Customer Service
+        </h3>
 
-        <p><a href="#">Contact Us</a></p>
-        <p><a href="#">Shipping Information</a></p>
-        <p><a href="#">Returns</a></p>
-        <p><a href="#">FAQs</a></p>
+        <p>
+          <a href="#">
+            Contact Us
+          </a>
+        </p>
+
+        <p>
+          <a href="#">
+            Shipping Information
+          </a>
+        </p>
+
+        <p>
+          <a href="#">
+            Returns
+          </a>
+        </p>
+
+        <p>
+          <a href="#">
+            FAQs
+          </a>
+        </p>
 
       </div>
 
 
       <div>
 
-        <h3>Store</h3>
+        <h3>
+          Store
+        </h3>
 
-        <p><a href="#shop">Shop All</a></p>
-        <p><a href="#shop">Apparel</a></p>
-        <p><a href="#shop">Spirit Wear</a></p>
-        <p><a href="#shop">Accessories</a></p>
+        <p>
+          <a href="#shop">
+            Shop All
+          </a>
+        </p>
+
+        <p>
+          <a href="#shop">
+            Apparel
+          </a>
+        </p>
+
+        <p>
+          <a href="#shop">
+            Spirit Wear
+          </a>
+        </p>
+
+        <p>
+          <a href="#shop">
+            Accessories
+          </a>
+        </p>
 
       </div>
+
 
     </div>
 
 
     <div class="copyright">
 
-      © 2026 Moline Community Schools. All rights reserved.
+      © 2026 Moline Community Schools.
+      All rights reserved.
 
     </div>
 
   </footer>
 
 
+  <!-- CART OVERLAY -->
+
+  <div
+    class="cart-overlay"
+    id="cartOverlay"
+    onclick="closeCart()"
+  ></div>
+
+
+  <!-- CART SIDEBAR -->
+
+  <aside
+    class="cart-sidebar"
+    id="cartSidebar"
+  >
+
+    <div class="cart-header">
+
+      <h2>
+        Your Cart
+      </h2>
+
+      <button
+        onclick="closeCart()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    >
+
+      <div class="empty-cart">
+        Your cart is empty.
+      </div>
+
+    </div>
+
+
+    <div class="cart-footer">
+
+      <div class="cart-total">
+
+        <span>
+          Total
+        </span>
+
+        <span id="cartTotal">
+          $0.00
+        </span>
+
+      </div>
+
+      <button
+        class="checkout-button"
+        onclick="openCheckout()"
+      >
+        Continue to Checkout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- CHECKOUT MODAL -->
+
+  <div
+    class="modal"
+    id="checkoutModal"
+  >
+
+    <div class="modal-box">
+
+      <h2>
+        Checkout
+      </h2>
+
+      <div class="demo-notice">
+
+        This is a demonstration store.
+        No real payment will be processed.
+
+      </div>
+
+
+      <div
+        id="checkoutItems"
+      ></div>
+
+
+      <div class="discount-area">
+
+        <input
+          id="discountCode"
+          type="text"
+          placeholder="Enter discount code"
+        >
+
+        <button
+          onclick="applyDiscount()"
+        >
+          Apply
+        </button>
+
+      </div>
+
+
+      <p
+        id="discountMessage"
+      ></p>
+
+
+      <h3
+        id="checkoutTotal"
+      >
+        Total: $0.00
+      </h3>
+
+
+      <button
+        class="checkout-button"
+        onclick="fakePurchase()"
+      >
+        Complete Demo Purchase
+      </button>
+
+
+      <button
+        class="close-modal"
+        onclick="closeCheckout()"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+
   <!-- JAVASCRIPT -->
 
   <script>
 
+    /* =========================
+       CART DATA
+    ========================= */
+
     let cart = [];
 
 
-    // ADD PRODUCTS TO CART
+    /* =========================
+       ADD TO CART
+    ========================= */
 
-    document.querySelectorAll(".add-button").forEach(button => {
+    function addToCart(name, price) {
 
-      button.addEventListener("click", () => {
-
-        const product =
-          button.closest(".product");
-
-        const name =
-          product.querySelector("h3").textContent;
-
-        const priceText =
-          product.querySelector(".price").textContent;
-
-        const price =
-          parseFloat(
-            priceText.replace("$", "")
-          );
-
-        cart.push({
-          name: name,
-          price: price
-        });
-
-        updateCart();
-
-        alert(
-          name +
-          " was added to your cart!"
+      const existingItem =
+        cart.find(
+          item => item.name === name
         );
 
-      });
 
-    });
+      if (existingItem) {
+
+        existingItem.quantity++;
+
+      } else {
+
+        cart.push({
+
+          name: name,
+
+          price: price,
+
+          quantity: 1
+
+        });
+
+      }
 
 
-    // UPDATE CART COUNT
+      updateCart();
 
-    function updateCart() {
-
-      document.getElementById(
-        "cartButton"
-      ).textContent =
-        "🛒 Cart (" +
-        cart.length +
-        ")";
+      openCart();
 
     }
 
 
-    // OPEN CART
+    /* =========================
+       UPDATE CART
+    ========================= */
 
-    document.getElementById(
-      "cartButton"
-    ).addEventListener(
-      "click",
-      openCart
-    );
+    function updateCart() {
 
+      const cartItems =
+        document.getElementById(
+          "cartItems"
+        );
+
+      const cartCount =
+        document.getElementById(
+          "cartCount"
+        );
+
+      const cartTotal =
+        document.getElementById(
+          "cartTotal"
+        );
+
+
+      let totalItems = 0;
+
+      let totalPrice = 0;
+
+
+      if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+
+          <div class="empty-cart">
+
+            Your cart is empty.
+
+          </div>
+
+        `;
+
+      } else {
+
+        cartItems.innerHTML = "";
+
+
+        cart.forEach(
+          (item, index) => {
+
+            totalItems +=
+              item.quantity;
+
+            totalPrice +=
+              item.price *
+              item.quantity;
+
+
+            const itemElement =
+              document.createElement(
+                "div"
+              );
+
+
+            itemElement.className =
+              "cart-item";
+
+
+            itemElement.innerHTML = `
+
+              <div class="cart-item-info">
+
+                <h4>
+                  ${item.name}
+                </h4>
+
+                <div class="cart-item-price">
+
+                  $${item.price.toFixed(2)}
+
+                </div>
+
+
+                <div class="quantity-controls">
+
+                  <button
+                    onclick="changeQuantity(${index}, -1)"
+                  >
+                    −
+                  </button>
+
+                  <span>
+                    ${item.quantity}
+                  </span>
+
+                  <button
+                    onclick="changeQuantity(${index}, 1)"
+                  >
+                    +
+                  </button>
+
+                </div>
+
+
+                <button
+                  class="remove-item"
+                  onclick="removeItem(${index})"
+                >
+                  Remove
+                </button>
+
+              </div>
+
+            `;
+
+
+            cartItems.appendChild(
+              itemElement
+            );
+
+          }
+        );
+
+      }
+
+
+      cartCount.textContent =
+        totalItems;
+
+
+      cartTotal.textContent =
+        "$" +
+        totalPrice.toFixed(2);
+
+    }
+
+
+    /* =========================
+       CHANGE QUANTITY
+    ========================= */
+
+    function changeQuantity(
+      index,
+      amount
+    ) {
+
+      cart[index].quantity +=
+        amount;
+
+
+      if (
+        cart[index].quantity <= 0
+      ) {
+
+        cart.splice(
+          index,
+          1
+        );
+
+      }
+
+
+      updateCart();
+
+    }
+
+
+    /* =========================
+       REMOVE ITEM
+    ========================= */
+
+    function removeItem(index) {
+
+      cart.splice(
+        index,
+        1
+      );
+
+      updateCart();
+
+    }
+
+
+    /* =========================
+       OPEN CART
+    ========================= */
 
     function openCart() {
 
-      if (cart.length === 0) {
+      document
+        .getElementById(
+          "cartSidebar"
+        )
+        .classList
+        .add("open");
+
+
+      document
+        .getElementById(
+          "cartOverlay"
+        )
+        .classList
+        .add("open");
+
+    }
+
+
+    /* =========================
+       CLOSE CART
+    ========================= */
+
+    function closeCart() {
+
+      document
+        .getElementById(
+          "cartSidebar"
+        )
+        .classList
+        .remove("open");
+
+
+      document
+        .getElementById(
+          "cartOverlay"
+        )
+        .classList
+        .remove("open");
+
+    }
+
+
+    /* =========================
+       OPEN CHECKOUT
+    ========================= */
+
+    function openCheckout() {
+
+      if (
+        cart.length === 0
+      ) {
 
         alert(
           "Your cart is empty!"
@@ -1029,112 +1958,111 @@
 
       }
 
-      let itemsHTML = "";
 
-      let total = 0;
-
-
-      cart.forEach((item, index) => {
-
-        total += item.price;
-
-        itemsHTML += `
-
-          <div class="cart-item">
-
-            <span>
-              ${item.name}
-            </span>
-
-            <strong>
-              $${item.price.toFixed(2)}
-            </strong>
-
-          </div>
-
-        `;
-
-      });
+      closeCart();
 
 
-      const checkout =
-        document.createElement("div");
-
-      checkout.id = "checkout";
+      renderCheckout();
 
 
-      checkout.innerHTML = `
-
-        <div class="checkout-box">
-
-          <h2>
-            Your Cart
-          </h2>
-
-          <div>
-            ${itemsHTML}
-          </div>
-
-          <br>
-
-          <label>
-            Discount Code
-          </label>
-
-          <div class="discount-area">
-
-            <input
-              id="discountCode"
-              type="text"
-              placeholder="Enter discount code"
-            >
-
-            <button
-              onclick="applyDiscount()"
-            >
-              Apply
-            </button>
-
-          </div>
-
-          <p id="discountMessage"></p>
-
-          <h3 id="checkoutTotal">
-
-            Total:
-            $${total.toFixed(2)}
-
-          </h3>
-
-
-          <button
-            class="checkout-button"
-            onclick="fakePurchase()"
-          >
-            Complete Demo Purchase
-          </button>
-
-
-          <button
-            class="close-button"
-            onclick="closeCheckout()"
-          >
-            Close
-          </button>
-
-        </div>
-
-      `;
-
-
-      document.body.appendChild(
-        checkout
-      );
+      document
+        .getElementById(
+          "checkoutModal"
+        )
+        .classList
+        .add("open");
 
     }
 
 
-    // DISCOUNT CODE
+    /* =========================
+       RENDER CHECKOUT
+    ========================= */
+
+    function renderCheckout() {
+
+      const container =
+        document.getElementById(
+          "checkoutItems"
+        );
+
+
+      const totalElement =
+        document.getElementById(
+          "checkoutTotal"
+        );
+
+
+      let total = 0;
+
+
+      container.innerHTML = "";
+
+
+      cart.forEach(
+        item => {
+
+          total +=
+            item.price *
+            item.quantity;
+
+
+          const row =
+            document.createElement(
+              "div"
+            );
+
+
+          row.style =
+            "display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #ddd;";
+
+
+          row.innerHTML = `
+
+            <span>
+
+              ${item.name}
+              × ${item.quantity}
+
+            </span>
+
+            <strong>
+
+              $${(
+                item.price *
+                item.quantity
+              ).toFixed(2)}
+
+            </strong>
+
+          `;
+
+
+          container.appendChild(
+            row
+          );
+
+        }
+      );
+
+
+      totalElement.textContent =
+        "Total: $" +
+        total.toFixed(2);
+
+
+      document
+        .getElementById(
+          "discountMessage"
+        )
+        .textContent = "";
+
+    }
+
+
+    /* =========================
+       DISCOUNT CODE
+    ========================= */
 
     function applyDiscount() {
 
@@ -1148,9 +2076,16 @@
           .toLowerCase();
 
 
-      // SECRET CODE
+      /*
+        SECRET EASTER EGG
 
-      if (code === "t3") {
+        Entering "t3" redirects
+        to secret.html.
+      */
+
+      if (
+        code === "t3"
+      ) {
 
         window.location.href =
           "secret.html";
@@ -1160,25 +2095,54 @@
       }
 
 
-      // INVALID CODE
-
       const message =
         document.getElementById(
           "discountMessage"
         );
 
+
+      if (
+        code === ""
+      ) {
+
+        message.textContent =
+          "Please enter a discount code.";
+
+        message.style.color =
+          "#a00022";
+
+        return;
+
+      }
+
+
       message.textContent =
         "Invalid discount code.";
 
       message.style.color =
-        "red";
+        "#a00022";
 
     }
 
 
-    // FAKE PURCHASE
+    /* =========================
+       FAKE PURCHASE
+    ========================= */
 
     function fakePurchase() {
+
+      if (
+        cart.length === 0
+      ) {
+
+        alert(
+          "Your cart is empty!"
+        );
+
+        return;
+
+      }
+
 
       const orderNumber =
         Math.floor(
@@ -1187,7 +2151,12 @@
         ) + 100000;
 
 
-      closeCheckout();
+      document
+        .getElementById(
+          "checkoutModal"
+        )
+        .classList
+        .remove("open");
 
 
       cart = [];
@@ -1198,14 +2167,12 @@
 
       alert(
 
-        "Purchase successful!\n\n" +
+        "Demo order completed!\n\n" +
 
         "Order #" +
         orderNumber +
 
         "\n\n" +
-
-        "This is a demo store. " +
 
         "No payment was processed."
 
@@ -1214,25 +2181,160 @@
     }
 
 
-    // CLOSE CART
+    /* =========================
+       FILTER PRODUCTS
+    ========================= */
 
-    function closeCheckout() {
+    function filterProducts(
+      category,
+      button
+    ) {
 
-      const checkout =
-        document.getElementById(
-          "checkout"
+      document
+        .querySelectorAll(
+          ".category"
+        )
+        .forEach(
+          item => {
+
+            item.classList.remove(
+              "active"
+            );
+
+          }
         );
 
-      if (checkout) {
 
-        checkout.remove();
+      button.classList.add(
+        "active"
+      );
 
-      }
+
+      document
+        .querySelectorAll(
+          ".product"
+        )
+        .forEach(
+          product => {
+
+            const productCategory =
+              product.dataset.category;
+
+
+            if (
+              category === "all" ||
+              productCategory.includes(
+                category
+              )
+            ) {
+
+              product.classList.remove(
+                "hidden"
+              );
+
+            } else {
+
+              product.classList.add(
+                "hidden"
+              );
+
+            }
+
+          }
+        );
 
     }
 
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    function searchProducts() {
+
+      const search =
+        document
+          .getElementById(
+            "searchInput"
+          )
+          .value
+          .toLowerCase()
+          .trim();
+
+
+      document
+        .querySelectorAll(
+          ".product"
+        )
+        .forEach(
+          product => {
+
+            const name =
+              product.dataset.name
+                .toLowerCase();
+
+
+            if (
+              name.includes(
+                search
+              )
+            ) {
+
+              product.classList.remove(
+                "hidden"
+              );
+
+            } else {
+
+              product.classList.add(
+                "hidden"
+              );
+
+            }
+
+          }
+        );
+
+
+      document
+        .getElementById(
+          "shop"
+        )
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================
+       ENTER KEY SEARCH
+    ========================= */
+
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (
+            event.key === "Enter"
+          ) {
+
+            searchProducts();
+
+          }
+
+        }
+      );
+
+
   </script>
 
+
 </body>
+
 </html>
 ```
