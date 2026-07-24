@@ -1,1 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Chatter</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+
+      margin: 0;
+
+      min-height: 100vh;
+
+      font-family: Arial, sans-serif;
+
+      background: #111827;
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+    .box {
+
+      width: 90%;
+
+      max-width: 500px;
+
+      background: #1f2937;
+
+      padding: 30px;
+
+      border-radius: 16px;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.4);
+
+      text-align: center;
+
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    p {
+      color: #d1d5db;
+    }
+
+    input {
+
+      width: 100%;
+
+      padding: 14px;
+
+      margin: 8px 0;
+
+      border: none;
+
+      border-radius: 8px;
+
+      background: #374151;
+
+      color: white;
+
+      font-size: 16px;
+
+      outline: none;
+
+    }
+
+    input::placeholder {
+      color: #9ca3af;
+    }
+
+    button {
+
+      width: 100%;
+
+      padding: 14px;
+
+      margin-top: 12px;
+
+      border: none;
+
+      border-radius: 8px;
+
+      background: #2563eb;
+
+      color: white;
+
+      font-size: 16px;
+
+      cursor: pointer;
+
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .switch-button {
+
+      background: transparent;
+
+      color: #60a5fa;
+
+    }
+
+    .switch-button:hover {
+
+      background: transparent;
+
+      color: #93c5fd;
+
+    }
+
+    .google-doc-button {
+
+      display: block;
+
+      width: 100%;
+
+      padding: 14px;
+
+      margin-top: 20px;
+
+      border-radius: 8px;
+
+      background: #16a34a;
+
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+    }
+
+    .google-doc-button:hover {
+      background: #15803d;
+    }
+
+    .logout-button {
+
+      background: #dc2626;
+
+      margin-top: 20px;
+
+    }
+
+    .logout-button:hover {
+      background: #b91c1c;
+    }
+
+    .admin-button {
+
+      background: #9333ea;
+
+      margin-top: 12px;
+
+    }
+
+    .admin-button:hover {
+      background: #7e22ce;
+    }
+
+    .delete-button {
+
+      background: #dc2626;
+
+      width: auto;
+
+      padding: 8px 12px;
+
+      margin: 0;
+
+    }
+
+    .delete-button:hover {
+      background: #b91c1c;
+    }
+
+    .error {
+
+      color: #f87171;
+
+      margin-top: 12px;
+
+      display: none;
+
+    }
+
+    .success {
+
+      color: #4ade80;
+
+      margin-top: 12px;
+
+      display: none;
+
+    }
+
+    #chat {
+      display: none;
+    }
+
+    #signupBox {
+      display: none;
+    }
+
+    #adminPanel {
+      display: none;
+    }
+
+    .user-list {
+
+      margin-top: 20px;
+
+      text-align: left;
+
+    }
+
+    .user-item {
+
+      background: #374151;
+
+      padding: 12px;
+
+      margin: 8px 0;
+
+      border-radius: 8px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+    }
+
+    .admin-badge {
+
+      display: inline-block;
+
+      background: #9333ea;
+
+      padding: 5px 10px;
+
+      border-radius: 20px;
+
+      font-size: 12px;
+
+      margin-top: 10px;
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- LOGIN -->
+
+  <div
+    class="box"
+    id="loginBox"
+  >
+
+    <h1>💬 Chatter</h1>
+
+    <p>
+      Log in to access Chatter
+    </p>
+
+    <input
+      type="text"
+      id="loginUsername"
+      placeholder="Username"
+      autocomplete="username"
+    >
+
+    <input
+      type="password"
+      id="loginPassword"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
+
+    <button onclick="login()">
+      Log In
+    </button>
+
+    <div
+      class="error"
+      id="loginError"
+    >
+      Incorrect username or password.
+    </div>
+
+    <button
+      class="switch-button"
+      onclick="showSignup()"
+    >
+      Don't have an account? Sign Up
+    </button>
+
+  </div>
+
+
+  <!-- SIGN UP -->
+
+  <div
+    class="box"
+    id="signupBox"
+  >
+
+    <h1>📝 Sign Up</h1>
+
+    <p>
+      Create your Chatter account
+    </p>
+
+    <input
+      type="text"
+      id="signupUsername"
+      placeholder="Choose a username"
+      autocomplete="username"
+    >
+
+    <input
+      type="password"
+      id="signupPassword"
+      placeholder="Choose a password"
+      autocomplete="new-password"
+    >
+
+    <input
+      type="password"
+      id="signupPasswordConfirm"
+      placeholder="Confirm your password"
+      autocomplete="new-password"
+    >
+
+    <button onclick="signup()">
+      Create Account
+    </button>
+
+    <div
+      class="error"
+      id="signupError"
+    ></div>
+
+    <div
+      class="success"
+      id="signupSuccess"
+    ></div>
+
+    <button
+      class="switch-button"
+      onclick="showLogin()"
+    >
+      Already have an account? Log In
+    </button>
+
+  </div>
+
+
+  <!-- USER CHAT PAGE -->
+
+  <div
+    class="box"
+    id="chat"
+  >
+
+    <h1>
+      💬 Welcome to Chatter
+    </h1>
+
+    <p id="welcomeMessage"></p>
+
+    <p>
+      You are logged in.
+    </p>
+
+    <!-- GOOGLE DOC -->
+
+    <a
+      class="google-doc-button"
+      href="PASTE_YOUR_GOOGLE_DOC_LINK_HERE"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Open Chatter
+    </a>
+
+    <!-- ADMIN PANEL BUTTON -->
+
+    <button
+      class="admin-button"
+      id="adminButton"
+      onclick="showAdminPanel()"
+      style="display: none;"
+    >
+      ⚙️ Admin Control Panel
+    </button>
+
+    <!-- LOG OUT -->
+
+    <button
+      class="logout-button"
+      onclick="logout()"
+    >
+      Log Out
+    </button>
+
+  </div>
+
+
+  <!-- ADMIN PANEL -->
+
+  <div
+    class="box"
+    id="adminPanel"
+  >
+
+    <h1>
+      ⚙️ Admin Control Panel
+    </h1>
+
+    <span class="admin-badge">
+      ADMINISTRATOR
+    </span>
+
+    <p>
+      Manage Chatter users.
+    </p>
+
+    <div
+      class="user-list"
+      id="userList"
+    ></div>
+
+    <button
+      onclick="backToChat()"
+    >
+      Back to Chatter
+    </button>
+
+    <button
+      class="logout-button"
+      onclick="logout()"
+    >
+      Log Out
+    </button>
+
+  </div>
+
+
+  <script>
+
+
+    /*
+    =====================================
+    ADMIN ACCOUNT
+    =====================================
+    */
+
+    const ADMIN_USERNAME = "admin";
+
+    const ADMIN_PASSWORD = "1234";
+
+
+    /*
+    =====================================
+    GET ACCOUNTS
+    =====================================
+    */
+
+    function getAccounts() {
+
+      const accounts =
+        localStorage.getItem(
+          "chatterAccounts"
+        );
+
+      if (!accounts) {
+
+        return {};
+
+      }
+
+      return JSON.parse(accounts);
+
+    }
+
+
+    /*
+    =====================================
+    SIGN UP
+    =====================================
+    */
+
+    function signup() {
+
+      const username =
+        document
+          .getElementById("signupUsername")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("signupPassword")
+          .value;
+
+      const confirmPassword =
+        document
+          .getElementById("signupPasswordConfirm")
+          .value;
+
+
+      const error =
+        document.getElementById(
+          "signupError"
+        );
+
+      const success =
+        document.getElementById(
+          "signupSuccess"
+        );
+
+
+      error.style.display = "none";
+
+      success.style.display = "none";
+
+
+      if (
+        username === "" ||
+        password === ""
+      ) {
+
+        error.textContent =
+          "Please fill out all fields.";
+
+        error.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      if (
+        username.length < 3
+      ) {
+
+        error.textContent =
+          "Username must be at least 3 characters.";
+
+        error.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      if (
+        password.length < 4
+      ) {
+
+        error.textContent =
+          "Password must be at least 4 characters.";
+
+        error.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      if (
+        password !== confirmPassword
+      ) {
+
+        error.textContent =
+          "Passwords do not match.";
+
+        error.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      /*
+      ADMIN USERNAME RESERVED
+      */
+
+      if (
+        username.toLowerCase() ===
+        ADMIN_USERNAME
+      ) {
+
+        error.textContent =
+          "That username is reserved.";
+
+        error.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      const accounts =
+        getAccounts();
+
+
+      if (
+        accounts[username]
+      ) {
+
+        error.textContent =
+          "That username is already taken.";
+
+        error.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      /*
+      CREATE ACCOUNT
+      */
+
+      accounts[username] = {
+
+        password: password
+
+      };
+
+
+      /*
+      SAVE ACCOUNT
+      */
+
+      localStorage.setItem(
+
+        "chatterAccounts",
+
+        JSON.stringify(accounts)
+
+      );
+
+
+      success.textContent =
+        "Account created successfully! You can now log in.";
+
+      success.style.display =
+        "block";
+
+
+      /*
+      CLEAR FIELDS
+      */
+
+      document
+        .getElementById(
+          "signupUsername"
+        )
+        .value = "";
+
+      document
+        .getElementById(
+          "signupPassword"
+        )
+        .value = "";
+
+      document
+        .getElementById(
+          "signupPasswordConfirm"
+        )
+        .value = "";
+
+    }
+
+
+    /*
+    =====================================
+    LOGIN
+    =====================================
+    */
+
+    function login() {
+
+      const username =
+        document
+          .getElementById(
+            "loginUsername"
+          )
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById(
+            "loginPassword"
+          )
+          .value;
+
+
+      /*
+      CHECK ADMIN
+      */
+
+      if (
+
+        username ===
+        ADMIN_USERNAME &&
+
+        password ===
+        ADMIN_PASSWORD
+
+      ) {
+
+        localStorage.setItem(
+
+          "chatterLoggedIn",
+
+          "true"
+
+        );
+
+        localStorage.setItem(
+
+          "chatterUsername",
+
+          ADMIN_USERNAME
+
+        );
+
+        localStorage.setItem(
+
+          "chatterIsAdmin",
+
+          "true"
+
+        );
+
+        showChat();
+
+        return;
+
+      }
+
+
+      /*
+      CHECK REGULAR USERS
+      */
+
+      const accounts =
+        getAccounts();
+
+
+      if (
+
+        accounts[username] &&
+
+        accounts[username].password ===
+        password
+
+      ) {
+
+        localStorage.setItem(
+
+          "chatterLoggedIn",
+
+          "true"
+
+        );
+
+        localStorage.setItem(
+
+          "chatterUsername",
+
+          username
+
+        );
+
+        localStorage.setItem(
+
+          "chatterIsAdmin",
+
+          "false"
+
+        );
+
+        showChat();
+
+      } else {
+
+        document
+          .getElementById(
+            "loginError"
+          )
+          .style.display =
+          "block";
+
+      }
+
+    }
+
+
+    /*
+    =====================================
+    SHOW CHAT
+    =====================================
+    */
+
+    function showChat() {
+
+      document
+        .getElementById(
+          "loginBox"
+        )
+        .style.display =
+        "none";
+
+
+      document
+        .getElementById(
+          "signupBox"
+        )
+        .style.display =
+        "none";
+
+
+      document
+        .getElementById(
+          "adminPanel"
+        )
+        .style.display =
+        "none";
+
+
+      document
+        .getElementById(
+          "chat"
+        )
+        .style.display =
+        "block";
+
+
+      const username =
+        localStorage.getItem(
+          "chatterUsername"
+        );
+
+
+      document
+        .getElementById(
+          "welcomeMessage"
+        )
+        .textContent =
+        "Welcome, " +
+        username +
+        "!";
+
+
+      /*
+      SHOW ADMIN BUTTON
+      */
+
+      const isAdmin =
+        localStorage.getItem(
+          "chatterIsAdmin"
+        ) === "true";
+
+
+      if (isAdmin) {
+
+        document
+          .getElementById(
+            "adminButton"
+          )
+          .style.display =
+          "block";
+
+      } else {
+
+        document
+          .getElementById(
+            "adminButton"
+          )
+          .style.display =
+          "none";
+
+      }
+
+    }
+
+
+    /*
+    =====================================
+    SHOW SIGN UP
+    =====================================
+    */
+
+    function showSignup() {
+
+      document
+        .getElementById(
+          "loginBox"
+        )
+        .style.display =
+        "none";
+
+
+      document
+        .getElementById(
+          "signupBox"
+        )
+        .style.display =
+        "block";
+
+    }
+
+
+    /*
+    =====================================
+    SHOW LOGIN
+    =====================================
+    */
+
+    function showLogin() {
+
+      document
+        .getElementById(
+          "signupBox"
+        )
+        .style.display =
+        "none";
+
+
+      document
+        .getElementById(
+          "loginBox"
+        )
+        .style.display =
+        "block";
+
+    }
+
+
+    /*
+    =====================================
+    ADMIN PANEL
+    =====================================
+    */
+
+    function showAdminPanel() {
+
+      const isAdmin =
+        localStorage.getItem(
+          "chatterIsAdmin"
+        ) === "true";
+
+
+      if (!isAdmin) {
+
+        alert(
+          "You do not have permission to access the Admin Panel."
+        );
+
+        return;
+
+      }
+
+
+      document
+        .getElementById(
+          "chat"
+        )
+        .style.display =
+        "none";
+
+
+      document
+        .getElementById(
+          "adminPanel"
+        )
+        .style.display =
+        "block";
+
+
+      loadUsers();
+
+    }
+
+
+    /*
+    =====================================
+    LOAD USERS
+    =====================================
+    */
+
+    function loadUsers() {
+
+      const accounts =
+        getAccounts();
+
+
+      const userList =
+        document.getElementById(
+          "userList"
+        );
+
+
+      userList.innerHTML = "";
+
+
+      const usernames =
+        Object.keys(accounts);
+
+
+      if (
+        usernames.length === 0
+      ) {
+
+        userList.innerHTML =
+          "<p>No regular users have signed up yet.</p>";
+
+        return;
+
+      }
+
+
+      usernames.forEach(
+        function(username) {
+
+          const userItem =
+            document.createElement(
+              "div"
+            );
+
+
+          userItem.className =
+            "user-item";
+
+
+          userItem.innerHTML = `
+
+            <span>
+              👤 ${escapeHtml(username)}
+            </span>
+
+            <button
+              class="delete-button"
+              onclick="deleteUser('${encodeURIComponent(username)}')"
+            >
+              Delete
+            </button>
+
+          `;
+
+
+          userList.appendChild(
+            userItem
+          );
+
+        }
+      );
+
+    }
+
+
+    /*
+    =====================================
+    DELETE USER
+    =====================================
+    */
+
+    function deleteUser(
+      encodedUsername
+    ) {
+
+      const username =
+        decodeURIComponent(
+          encodedUsername
+        );
+
+
+      const confirmed =
+        confirm(
+
+          "Delete the account '" +
+          username +
+          "'?"
+
+        );
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
+      const accounts =
+        getAccounts();
+
+
+      delete accounts[username];
+
+
+      localStorage.setItem(
+
+        "chatterAccounts",
+
+        JSON.stringify(accounts)
+
+      );
+
+
+      loadUsers();
+
+    }
+
+
+    /*
+    =====================================
+    ESCAPE HTML
+    =====================================
+    */
+
+    function escapeHtml(
+      text
+    ) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.textContent =
+        text;
+
+      return div.innerHTML;
+
+    }
+
+
+    /*
+    =====================================
+    BACK TO CHAT
+    =====================================
+    */
+
+    function backToChat() {
+
+      showChat();
+
+    }
+
+
+    /*
+    =====================================
+    LOG OUT
+    =====================================
+    */
+
+    function logout() {
+
+      localStorage.removeItem(
+        "chatterLoggedIn"
+      );
+
+      localStorage.removeItem(
+        "chatterUsername"
+      );
+
+      localStorage.removeItem(
+        "chatterIsAdmin"
+      );
+
+
+      location.reload();
+
+    }
+
+
+    /*
+    =====================================
+    CHECK EXISTING LOGIN
+    =====================================
+    */
+
+    if (
+
+      localStorage.getItem(
+        "chatterLoggedIn"
+      ) === "true"
+
+    ) {
+
+      showChat();
+
+    }
+
+  </script>
+
+</body>
+
+</html>
