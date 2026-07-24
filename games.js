@@ -6,7 +6,7 @@ const ARCHIVE_METADATA_URL =
 
 let currentGameURL = null;
 
-# /*
+/*
 
 # LOAD ALL GAMES
 
