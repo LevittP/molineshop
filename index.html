@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moline Schools Shop • Unofficial</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <div class="official-warning">
+    <strong>⚠ UNOFFICIAL WEBSITE</strong>
+    <span>
+      This website is NOT affiliated with, endorsed by, sponsored by, or operated by
+      Moline-Coal Valley Community Unit School District 40.
+    </span>
+  </div>
+
+  <header class="navbar">
+    <a href="#" class="logo">
+      MOLINE<span>SHOP</span>
+    </a>
+
+    <nav>
+      <a href="#trending">Trending</a>
+      <a href="#school">School Stuff</a>
+      <a href="#discounts">Discounts</a>
+    </nav>
+
+    <button class="cart-button" onclick="showCart()">
+      🛒 <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+        <p class="eyebrow">UNOFFICIAL • JUST FOR FUN</p>
+
+        <h1>
+          Stuff you<br>
+          <span>probably</span><br>
+          don't need.
+        </h1>
+
+        <p class="hero-description">
+          A completely unofficial school-themed parody shop.
+          Everything looks buyable. Nothing can actually be purchased.
+        </p>
+
+        <a href="#trending" class="hero-button">
+          ENTER THE STORE ↓
+        </a>
+      </div>
+
+      <div class="hero-card">
+        <div class="fake-badge">
+          NOT A REAL STORE
+        </div>
+
+        <div class="hero-emoji">
+          🎒
+        </div>
+
+        <h3>
+          YOUR WALLET<br>
+          IS SAFE
+        </h3>
+
+        <p>
+          NO REAL CHECKOUT
+        </p>
+      </div>
+
+    </section>
+
+    <div class="ticker">
+      <span>🔥 TOTALLY REAL-LOOKING DEALS</span>
+      <span>⚡ 100% FAKE CHECKOUT</span>
+      <span>🛑 NO ACTUAL PURCHASES</span>
+      <span>💸 YOUR WALLET IS SAFE</span>
+      <span>🔥 TOTALLY REAL-LOOKING DEALS</span>
+    </div>
+
+    <section id="trending" class="products-section">
+
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">TRENDING NOW</p>
+          <h2>Everybody wants it.</h2>
+        </div>
+
+        <span class="item-count">
+          8 ITEMS
+        </span>
+      </div>
+
+      <div id="products" class="product-grid"></div>
+
+    </section>
+
+    <section id="school" class="warning-section">
+
+      <div>
+        <p class="eyebrow">IMPORTANT</p>
+
+        <h2>
+          This is a parody storefront.
+        </h2>
+
+        <p>
+          No school merchandise is actually being sold here.
+          No payments are processed and checkout is intentionally disabled.
+          Do not enter payment information.
+        </p>
+      </div>
+
+      <div class="lock-icon">
+        🔒
+        <small>NO CHECKOUT</small>
+      </div>
+
+    </section>
+
+    <section id="discounts" class="discount-section">
+
+      <p class="eyebrow">GOT A CODE?</p>
+
+      <h2>
+        Try your luck.
+      </h2>
+
+      <p>
+        Most discount codes do absolutely nothing because, tragically,
+        there are no real purchases here.
+      </p>
+
+      <div class="discount-box">
+
+        <input
+          id="discountInput"
+          type="text"
+          placeholder="Enter discount code"
+          autocomplete="off"
+        >
+
+        <button onclick="redeemCode()">
+          APPLY
+        </button>
+
+      </div>
+
+      <p id="codeMessage" class="code-message"></p>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <div class="footer-logo">
+      MOLINE<span>SHOP</span>
+    </div>
+
+    <p>
+      Unofficial fan-made parody project.
+      Not affiliated with, endorsed by, sponsored by, or operated by
+      Moline-Coal Valley Community Unit School District 40.
+    </p>
+
+    <p>
+      © 2026 • No real purchases • No payment collection
+    </p>
+
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
